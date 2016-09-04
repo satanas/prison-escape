@@ -1,6 +1,9 @@
 var Scene = function() {
+  var _ = this;
+  // Exit the loop
+  _.ex = 0;
   // Time-related variables and methods
-  this.t = {
+  _.t = {
     s: 0, // Start time
     e: 0 // Elapsed time
   };
@@ -14,8 +17,13 @@ Scene.prototype.loop = function() {
   _.update();
   // Set start time
   _.t.s = now();
-  raf(_.loop.bind(_));
+  if (!_.ex) {
+    raf(_.loop.bind(_));
+  } else {
+    return;
+  }
 };
 
-Scene.prototype.update = function() {
+Scene.prototype.exit = function() {
+  this.ex = 1;
 }
