@@ -19,7 +19,9 @@ $.init = function(w, h) {
   // $.x = Canvas context
   $.x = $.cv.getContext('2d');
   // Camera system
-  $.c = new Camera($.vw, $.vh);
+  $.cam = new Camera($.vw, $.vh);
+  // Game Scenes
+  $.scn = {};
   // Rename common used methods
   // FIXME: use a local var until the end (to avoid repeating $.x)
   $.x.s = $.x.save;

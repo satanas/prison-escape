@@ -19,6 +19,6 @@ MenuScene.prototype.update = function() {
   $.x.r();
 
   if ($.i.p(13) && _.c >= _.d) {
-    return $.game.start();
+    return $.scn.game.start();
   }
 };
