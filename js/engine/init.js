@@ -50,25 +50,24 @@ $.hide = function(i) {
   $.byId(i).style.opacity = 0;
 };
 
+// Get canvas
+$.cv = document.querySelector("canvas");
+
 // Initialize all variables
 // cid: canvas id
 // w: width
 // h: height
-$.init = function(cid, w, h) {
-  $._w = w;
-  $._h = h;
+$.init = function(w, h) {
+  // $.vh = Viewport height
+  $.vh = $.cv.height;
+  // $.vw = Viewport width
+  $.vw = $.cv.width;
   // $.g = Collision groups
   $.g = {};
   // $.e = Elapsed time since previous frame
   $.e = 0;
-  // Get canvas
-  var c = $.byId(cid);
   // $.x = Canvas context
-  $.x = c.getContext('2d');
-  // $.vh = Viewport height
-  $.vh = c.height = window.innerHeight;
-  // $.vw = Viewport width
-  $.vw = c.width = $.vh * w / h;
+  $.x = $.cv.getContext('2d');
   // Camera system
   $.c = new Camera($.vw, $.vh);
   // Rename common used methods
@@ -127,3 +126,14 @@ $.init = function(cid, w, h) {
     $.x.ft(t, ($.vw - x.width) / 2, y);
   };
 };
+
+function resize() {
+  var h = window.innerHeight;
+  var w = h * $.cv.width / $.cv.height;
+
+  $.cv.style.width = w+'px';
+  $.cv.style.height = h+'px';
+}
+
+window.addEventListener('load', resize, false);
+window.addEventListener('resize', resize, false);

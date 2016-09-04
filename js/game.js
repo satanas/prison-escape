@@ -4,7 +4,7 @@ window.addEventListener('load', function() {
 });
 
 $.start = function() {
-  $.init('c', 640, 480);
+  $.init();
   // Input
   $.i = new Input();
   // Collisions system

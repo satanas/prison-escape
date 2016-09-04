@@ -7,11 +7,6 @@
 }
 canvas {
   z-index: 1;
-}
-#w {
-  min-width: 640px;
-  min-height: 480px;
   margin: 0 auto;
-  text-align: center;
-  position: relative;
+  display: block;
 }
