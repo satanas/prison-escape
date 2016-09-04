@@ -66,39 +66,6 @@ $.start = function() {
   $.menu.loop();
 };
 
-var MenuScene = function() {
-  var _ = this;
-  // FIXME: Hack to avoid double enter
-  _.d = 100; // Delay
-  _.c = 0; // Counter
-  _.t = {
-    s: 0, // Start time
-    e: 0 // Elapsed time
-  };
-
-  _.loop = function() {
-    $.e = (_.t.s !== 0) ? new Date() - _.t.s : 0;
-
-    if (_.c < _.d) _.c += $.e;
-    $.x.clr('ivory');
-
-    $.x.s();
-    $.x.ct('Please, Die', 75, 200, 0, 0, "small-caps bold");
-    $.x.ct('Press Enter to play', 20, 420, "firebrick");
-    $.x.ct("Created by @satanas82 for the js13k compo 2015", 14, 470, "gray");
-    $.x.r();
-
-    if ($.i.p(13) && _.c >= _.d) {
-      $.s.p('s');
-      $.ingame = 1;
-      return $.game.start();
-    }
-
-    _.t.s = new Date();
-    raf(_.loop.bind(_));
-  };
-};
-
 var GameScene = function() {
   var _ = this;
   // Time associated variables and methods
