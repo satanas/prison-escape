@@ -6,21 +6,27 @@ var GameScene = function() {
   // Distance traveled
   _.dt = 0;
   // Speed
-  _.sp = 5; // pixels per second
+  _.sp = 50; // pixels per second
 
   // Groups
   $.g.p = new Group(); // Platforms
 
-  $.g.p.a(new Platform(120));
+  _.px1 = new Parallax1();
+
+  $.g.p.a(new Platform(170));
+  $.g.p.a(new Platform(310));
+  $.g.p.a(new Platform(450));
+
 
   _.update = function() {
     $.x.clr('white');
     _.dt += (_.t.e / 1000) * _.sp;
 
-    //$.g.p.u();
+    _.px1.u(_.dt);
 
     //$.cam.u();
 
+    _.px1.r(); // Render Parallax
     $.g.p.r(); // Render Platforms
 
     // This is to avoid wormholes:
