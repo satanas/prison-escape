@@ -38,7 +38,7 @@ var Camera = function(w, h, ww, wh) {
   };
 
   // Update
-  _.update = function() {
+  _.u = function() {
     if (!_.tg) return;
     // Update offset according the target
     var tx, ty = 0,
@@ -74,14 +74,14 @@ var Camera = function(w, h, ww, wh) {
   };
 
   // Render
-  _.render = function(k) {
+  _.r = function(k) {
     if (!k) return;
     if (!(k instanceof Array)) k = [k];
 
     k.forEach(function(o) {
       if (_.inView(o)) {
         var t = _.transformCoordinates(o);
-        o.render(t);
+        o.r(t);
       }
     });
   };
