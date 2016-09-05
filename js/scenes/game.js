@@ -8,6 +8,7 @@ var GameScene = function() {
   // Speed
   _.sp = 250; // pixels per second
 
+  _.p = new Player();
   // Groups
   $.g.p = new Group(); // Platforms
 
@@ -28,12 +29,13 @@ var GameScene = function() {
     _.px2.u(_.t.e);
     _.px1.u(_.t.e);
 
-    //$.cam.u();
+    _.p.u();
 
     _.px3.r(); // Render Parallax
     _.px2.r(); // Render Parallax
     _.px1.r(); // Render Parallax
     $.g.p.r(); // Render Platforms
+    _.p.r(); // Render Player
 
     // This is to avoid wormholes:
     // https://hacks.mozilla.org/2011/08/animating-with-javascript-from-setinterval-to-requestanimationframe/
