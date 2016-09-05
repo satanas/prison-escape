@@ -1,8 +1,9 @@
-var BaseParallax = function(w, sp, dw) {
+var BaseParallax = function(w, sp, sf, dw) {
   var _ = this;
   _.w = w;
   _.off = 0;
-  _.sp = sp; // Speed
+  _.sp = sp * sf; // Speed
+  _.sf = sf; // Speed fraction
   _.dt = 0; // Distance traveled
   _.c = document.createElement('canvas');
   _.c.width = _.w;
@@ -17,6 +18,10 @@ var BaseParallax = function(w, sp, dw) {
   // Set fillStyle
   _.fs = function(c) {
     _.cx.fillStyle = c;
+  };
+  // Set new speed
+  _.ss = function(s) {
+    _.sp = s * _.sf;
   };
 
   _.u = function(e) {
@@ -41,7 +46,7 @@ var BaseParallax = function(w, sp, dw) {
 var Parallax1 = function(sp) {
   var _ = this;
   _.inherits(BaseParallax);
-  BaseParallax.call(_, 800, sp * 2 / 3, function() {
+  BaseParallax.call(_, 800, sp, 3 / 4, function() {
     _.cx.save();
     _.fs("#1e1b35");
     _.fr(20, 240, 100, 480);
@@ -58,7 +63,7 @@ var Parallax1 = function(sp) {
 var Parallax2 = function(sp) {
   var _ = this;
   _.inherits(BaseParallax);
-  BaseParallax.call(_, 1000, sp * 1 / 2, function() {
+  BaseParallax.call(_, 1000, sp, 1 / 2, function() {
     _.cx.save();
     _.fs("#212541");
     _.fr(0, 140, 75, 480);
@@ -78,7 +83,7 @@ var Parallax2 = function(sp) {
 var Parallax3 = function(sp) {
   var _ = this;
   _.inherits(BaseParallax);
-  BaseParallax.call(_, 1200, sp * 1 / 3, function() {
+  BaseParallax.call(_, 1200, sp, 1 / 4, function() {
     _.cx.save();
     _.fs("#272a4d");
     _.fr(0, 20, 70, 480);
