@@ -6,6 +6,11 @@ window.raf = window.requestAnimationFrame ||
 window.caf = window.cancelAnimationFrame ||
   window.mozCancelAnimationFrame;
 
+Object.prototype.inherits = function(parent) {
+  this.prototype = Object.create(parent.prototype);
+  this.prototype.constructor = this;
+};
+
 var abs = Math.abs,
     cos = Math.cos,
     sin = Math.sin,
