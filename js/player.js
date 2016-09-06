@@ -15,6 +15,8 @@ var Player = function() {
     } else if ($.i.d(40)) {
       _.hi = (_.hi + 1 > _.hs.length - 1) ? _.hs.length - 1 : _.hi + 1;
       _.y = _.hs[_.hi];
+    } else if ($.i.d(32)) {
+      $.g.pb.a(new Bullet(_.x + _.w, _.y + (_.h/ 2)));
     }
     $.i.c();
   };
