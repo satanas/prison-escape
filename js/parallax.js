@@ -25,7 +25,7 @@ var BaseParallax = function(w, sp, sf, dw) {
   };
 
   _.u = function(e) {
-    _.dt += (e / 1000) * _.sp;
+    _.dt += ($.e / 1000) * _.sp;
     _.off = _.dt % _.w;
   };
 

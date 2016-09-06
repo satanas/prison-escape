@@ -6,7 +6,7 @@ var MenuScene = function() {
 
   _.update = function() {
     var _ = this;
-    if (_.c < _.d) _.c += _.t.e;
+    if (_.c < _.d) _.c += $.e;
     $.x.clr('ivory');
 
     $.x.s();

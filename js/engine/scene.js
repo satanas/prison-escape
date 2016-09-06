@@ -5,8 +5,8 @@ var Scene = function() {
   // Time-related variables and methods
   _.t = {
     s: 0, // Start time
-    e: 0 // Elapsed time
   };
+  $.e = 0;
 
   _.start = function() {
     this.init();
@@ -19,7 +19,7 @@ var Scene = function() {
   _.loop = function() {
     var _ = this;
     // Calculate elapsed time
-    _.t.e = (_.t.s !== 0) ? now() - _.t.s : 0;
+    $.e = (_.t.s !== 0) ? now() - _.t.s : 0;
     // Update scene
     _.update();
     // Set start time
