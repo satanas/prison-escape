@@ -4,11 +4,12 @@ var Sprite = function(x, y, w, h) {
   _.y = y;
   _.w = w;
   _.h = h;
+  _.a = 1; // Alive
   // Bounds
   _.b = {};
 
-  // Calculate bounds
-  _.calcb = function() {
+  // Update rect bounds
+  _.ur = function() {
     _.b = {
       b: _.y + _.h,
       t: _.y,
@@ -17,5 +18,5 @@ var Sprite = function(x, y, w, h) {
     };
   };
 
-  _.calcb();
+  _.ur();
 };
