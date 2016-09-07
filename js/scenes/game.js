@@ -9,6 +9,8 @@ var GameScene = function() {
   _.de = 100000; // Distance to escape
   $.sp = 550; // Speed in pixels per second
 
+  $.scn.gover = new GameOverScene();
+
   _.p = new Player();
   // Groups
   $.g.p = new Group(); // Platforms

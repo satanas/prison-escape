@@ -16,7 +16,6 @@ window.addEventListener('load', function() {
   // Registering scenes
   $.scn.menu = new MenuScene();
   $.scn.game = new GameScene();
-  $.scn.gover = new GameOverScene();
 
   $.scn.menu.loop();
   //$.scn.gover.loop();
