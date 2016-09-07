@@ -5,7 +5,7 @@ var GameScene = function() {
 
   _.dt = 0; // Distance traveled
   _.de = 100000; // Distance to escape
-  $.sp = 250; // Speed in pixels per second
+  $.sp = 850; // Speed in pixels per second
 
   _.p = new Player();
   // Groups
@@ -22,10 +22,6 @@ var GameScene = function() {
   $.g.p.a(new Platform(310));
   $.g.p.a(new Platform(450));
 
-  // 1. Choose line
-  // 2. Random base X
-  // 3. Check no coins
-
   _.lvl = new Level();
   _.lvl.gen();
 
@@ -40,6 +36,7 @@ var GameScene = function() {
     _.px1.u();
     $.g.pb.u();
     $.g.c.u();
+    $.g.e.u();
     _.p.u();
 
     // Render
@@ -47,6 +44,7 @@ var GameScene = function() {
     _.px2.r();
     _.px1.r();
     $.g.p.r();
+    $.g.e.r();
     $.g.c.r();
     _.p.r();
     $.g.pb.r();

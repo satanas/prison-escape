@@ -1,9 +1,15 @@
 var Level = function() {
   var _ = this;
   _.xc = 300; // Max coins per play
+  _.xe = 100;
   // Element positions (as arrays)
   _.pos = {
     c: [
+      [],
+      [],
+      []
+    ],
+    e: [
       [],
       [],
       []
@@ -12,7 +18,7 @@ var Level = function() {
 
   _.gen = function() {
     spawnCoins();
-    console.log(_.pos.c);
+    spawnEnemies();
   };
 
   var spawnCoinsSegment = function(x, y, n) {
@@ -31,7 +37,7 @@ var Level = function() {
       n = rndr(3, 10);
       n = (_.xc >= n) ? n : _.xc;
 
-      bb = b;
+      bb = b - 50;
       b += spawnCoinsSegment(b, y, n);
       _.xc -= n;
       _.pos.c[y].push([bb, b]);
@@ -39,13 +45,33 @@ var Level = function() {
     }
   };
 
-  var isCoin = function(x, y) {
-    for (var i=0; i<_.pos.c[y].length; i++) {
-      if (x >= _.pos.c[y][0] && x <= _.pos.c[y][1]) return true;
+  var isEmpty = function(x, y) {
+    var arr = Object.keys(_.pos), ll, rl;
+
+    for (var j=0; j<arr.length; j++) {
+      for (var i=0; i<_.pos[arr[j]][y].length; i++) {
+        ll = _.pos[arr[j]][y][i][0];
+        rl = _.pos[arr[j]][y][i][1];
+        if (x >= ll && x <= rl) return false;
+      }
     }
-    return false
+    return true
   };
 
   var spawnEnemies = function() {
+    var b = 0, y, bb;
+
+    while (_.xe > 0) {
+      //bb = b + rndr(200, 400);
+      bb = b + rndr(600, 800);
+      y = rnde([0, 1, 2]);
+
+      if (!isEmpty(bb, y)) continue;
+
+      b = bb;
+      _.xe -= 1;
+      _.pos.e[y].push([b - 50, b + 100]);
+      $.g.e.a(new Cop(b, y));
+    }
   };
 };
