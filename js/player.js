@@ -19,6 +19,7 @@ var Player = function() {
     } else if ($.i.d(32)) {
       $.g.pb.a(new Bullet(_.x + _.w, _.y + (_.h/ 2)));
     }
+    _.ur();
 
     $.g.c.c(_, function(p, c) {
       c.a = 0;
