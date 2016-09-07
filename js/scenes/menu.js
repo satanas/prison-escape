@@ -1,8 +1,9 @@
 var MenuScene = function() {
   var _ = this;
+  _.inherits(Scene);
+  Scene.call(_);
   _.d = 100; // Delay before enabling the keyboard
   _.c = 0; // Counter
-  Scene.call(_);
 
   _.update = function() {
     var _ = this;
@@ -21,6 +22,3 @@ var MenuScene = function() {
     }
   };
 };
-
-MenuScene.prototype = Object.create(Scene.prototype);
-MenuScene.prototype.constructor = MenuScene;
