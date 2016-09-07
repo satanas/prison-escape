@@ -4,7 +4,7 @@ window.addEventListener('load', function() {
   // Input
   $.i = new Input();
   // Collisions system
-  //$.o = new Collisions();
+  $.o = new Collisions();
   // Sound manager
   //$.s = new Sounds();
   // Bind keyboard

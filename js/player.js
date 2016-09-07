@@ -4,6 +4,7 @@ var Player = function() {
   _.hs = [106, 246, 386];
   // Height index
   _.hi = 1;
+  _.cc = 0; // Collected coins
   _.inherits(Sprite);
   Sprite.call(_, 120, _.hs[_.hi], 48, 64);
 
@@ -18,6 +19,11 @@ var Player = function() {
     } else if ($.i.d(32)) {
       $.g.pb.a(new Bullet(_.x + _.w, _.y + (_.h/ 2)));
     }
+
+    $.g.c.c(_, function(p, c) {
+      c.a = 0;
+      _.cc += 1;
+    });
     $.i.c();
   };
 

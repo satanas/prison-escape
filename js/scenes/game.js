@@ -12,7 +12,7 @@ var GameScene = function() {
   // Groups
   $.g.p = new Group(); // Platforms
   $.g.pb = new Group(); // Player bullets
-  $.g.c = new Group(); // Collectibles
+  $.g.c = new Group(); // Coins
 
   _.px1 = new Parallax1($.sp);
   _.px2 = new Parallax2($.sp);
