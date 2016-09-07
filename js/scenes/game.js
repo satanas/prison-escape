@@ -7,7 +7,9 @@ var GameScene = function() {
   $.dt = 0; // Distance traveled
   $.cc = 0; // Collected coins
   _.de = 100000; // Distance to escape
-  $.sp = 550; // Speed in pixels per second
+  $.sp = 0; // Speed in pixels per second
+  _.mis = 300; // Min speed
+  _.mxs = 900; // Max speed
 
   $.scn.gover = new GameOverScene();
 
@@ -32,6 +34,7 @@ var GameScene = function() {
 
   _.update = function() {
     $.x.clr('#1e4458');
+    $.sp = _.mis + ($.dt * _.mxs) / _.de;
     $.dt += ($.e / 1000) * $.sp;
 
     // Update
