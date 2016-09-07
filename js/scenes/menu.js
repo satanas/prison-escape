@@ -10,7 +10,7 @@ var MenuScene = function() {
     $.x.clr('ivory');
 
     $.x.s();
-    $.x.ct('Please, Die', 75, 200, 0, 0, "small-caps bold");
+    $.x.ct('Prison Escape', 75, 200, 0, 0, "small-caps bold");
     $.x.ct('Press Enter to play', 20, 420, "firebrick");
     $.x.ct("Created by @satanas82 for the js13k compo 2016", 14, 470, "gray");
     $.x.r();
