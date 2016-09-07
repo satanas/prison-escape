@@ -18,6 +18,6 @@ window.addEventListener('load', function() {
   $.scn.game = new GameScene();
   $.scn.gover = new GameOverScene();
 
-  //$.scn.menu.loop();
-  $.scn.gover.loop();
+  $.scn.menu.loop();
+  //$.scn.gover.loop();
 });
