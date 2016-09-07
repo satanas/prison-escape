@@ -3,6 +3,8 @@ var Level = function() {
   _.xc = 300; // Max coins per game
   _.xe = 100; // Max enemies per game
   _.xx = 60; // Max explosives per game
+  _.xr = 40; // Max running cops per game
+  _.xw = 40; // Max laser walls per game
   // Element positions (as arrays)
   _.pos = {
     c: [
@@ -21,6 +23,8 @@ var Level = function() {
     spawnCoins();
     spawnEnemies();
     spawnExplosives();
+    spawnRunningEnemies();
+    spawnLaserWalls();
   };
 
   var spawnCoinsSegment = function(x, y, n) {
@@ -64,8 +68,7 @@ var Level = function() {
     var b = 0, y, bb;
 
     while (_.xe > 0) {
-      //bb = b + rndr(200, 400);
-      bb = b + rndr(600, 800);
+      bb = b + rndr(800, 1200);
       y = rnde([0, 1, 2]);
 
       if (!isEmpty(bb, y)) continue;
@@ -81,7 +84,7 @@ var Level = function() {
     var b = 0, y, bb;
 
     while (_.xx > 0) {
-      bb = b + rndr(600, 800);
+      bb = b + rndr(1400, 1800);
       y = rnde([0, 1, 2]);
 
       if (!isEmpty(bb, y)) continue;
@@ -92,4 +95,38 @@ var Level = function() {
       $.g.e.a(new Explosive(b, y));
     }
   };
+
+  var spawnLaserWalls = function() {
+    var b = 1000, y, bb;
+
+    while (_.xw > 0) {
+      bb = b + rndr(2200, 2700);
+      y = rnde([0, 1, 2]);
+
+      if (!isEmpty(bb, y)) continue;
+
+      b = bb;
+      _.xw -= 1;
+      _.pos.e[y].push([b - 10, b + 10]);
+      $.g.e.a(new LaserWall(b, y));
+    }
+  };
+
+  var spawnRunningEnemies = function() {
+    var b = 0, y, bb;
+
+    while (_.xr > 0) {
+      bb = b + rndr(2200, 2700);
+      y = rnde([0, 1, 2]);
+
+      if (!isEmpty(bb, y)) continue;
+
+      b = bb;
+      _.xr -= 1;
+      _.pos.e[y].push([b - 50, b + 100]);
+      $.g.e.a(new RunningCop(b, y));
+    }
+  };
+
+  $.g.e.a(new RunningCop(1200, 1));
 };

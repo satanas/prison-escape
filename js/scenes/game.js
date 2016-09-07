@@ -5,7 +5,7 @@ var GameScene = function() {
 
   _.dt = 0; // Distance traveled
   _.de = 100000; // Distance to escape
-  $.sp = 450; // Speed in pixels per second
+  $.sp = 550; // Speed in pixels per second
 
   _.p = new Player();
   // Groups
@@ -13,6 +13,7 @@ var GameScene = function() {
   $.g.pb = new Group(); // Player bullets
   $.g.c = new Group(); // Coins
   $.g.e = new Group(); // Enemies
+  $.g.w = new Group(); // Warnings
 
   _.px1 = new Parallax1($.sp);
   _.px2 = new Parallax2($.sp);
@@ -28,7 +29,6 @@ var GameScene = function() {
   _.update = function() {
     $.x.clr('#1e4458');
     _.dt += ($.e / 1000) * $.sp;
-    console.log($.g.c.e.length);
 
     // Update
     _.px3.u();
@@ -37,6 +37,7 @@ var GameScene = function() {
     $.g.pb.u();
     $.g.c.u();
     $.g.e.u();
+    $.g.w.u();
     _.p.u();
 
     // Render
@@ -48,6 +49,7 @@ var GameScene = function() {
     $.g.c.r();
     _.p.r();
     $.g.pb.r();
+    $.g.w.r();
 
     // This is to avoid wormholes:
     // https://hacks.mozilla.org/2011/08/animating-with-javascript-from-setinterval-to-requestanimationframe/
