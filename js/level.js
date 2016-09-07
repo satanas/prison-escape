@@ -1,7 +1,8 @@
 var Level = function() {
   var _ = this;
-  _.xc = 300; // Max coins per play
-  _.xe = 100;
+  _.xc = 300; // Max coins per game
+  _.xe = 100; // Max enemies per game
+  _.xx = 60; // Max explosives per game
   // Element positions (as arrays)
   _.pos = {
     c: [
@@ -19,6 +20,7 @@ var Level = function() {
   _.gen = function() {
     spawnCoins();
     spawnEnemies();
+    spawnExplosives();
   };
 
   var spawnCoinsSegment = function(x, y, n) {
@@ -72,6 +74,22 @@ var Level = function() {
       _.xe -= 1;
       _.pos.e[y].push([b - 50, b + 100]);
       $.g.e.a(new Cop(b, y));
+    }
+  };
+
+  var spawnExplosives = function() {
+    var b = 0, y, bb;
+
+    while (_.xx > 0) {
+      bb = b + rndr(600, 800);
+      y = rnde([0, 1, 2]);
+
+      if (!isEmpty(bb, y)) continue;
+
+      b = bb;
+      _.xx -= 1;
+      _.pos.e[y].push([b - 50, b + 100]);
+      $.g.e.a(new Explosive(b, y));
     }
   };
 };

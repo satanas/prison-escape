@@ -5,7 +5,7 @@ var GameScene = function() {
 
   _.dt = 0; // Distance traveled
   _.de = 100000; // Distance to escape
-  $.sp = 850; // Speed in pixels per second
+  $.sp = 450; // Speed in pixels per second
 
   _.p = new Player();
   // Groups
