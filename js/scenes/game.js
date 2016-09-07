@@ -55,7 +55,7 @@ var GameScene = function() {
 
     if (_.p.hp <= 0) {
       $.sp = 0;
-      _.fout($.scn.menu, 1500);
+      _.fout($.scn.gover, 1500);
     }
 
     // This is to avoid wormholes:

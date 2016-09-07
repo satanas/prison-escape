@@ -13,9 +13,11 @@ window.addEventListener('load', function() {
   // Sounds
   //$.s.a('s', [0,,0.0989,0.3295,0.2402,0.4314,,,,,,0.4986,0.5758,,,,,,1,,,,,0.5]);
 
-  // Loading Scenes
+  // Registering scenes
   $.scn.menu = new MenuScene();
   $.scn.game = new GameScene();
+  $.scn.gover = new GameOverScene();
 
-  $.scn.menu.loop();
+  //$.scn.menu.loop();
+  $.scn.gover.loop();
 });

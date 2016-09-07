@@ -41,3 +41,38 @@ var Warning = function(y) {
     }
   };
 };
+
+var Door = function() {
+  var _ = this;
+  _.inherits(Sprite);
+  _.sp = 350; // Speed
+  _.dt = 300; // Delay before start moving
+  _.ct = 0; // Counter
+  _.cl = 0; // Is door closed?
+  Sprite.call(_, -160, 0, 320, $.vh);
+
+  _.u = function() {
+    _.ct += $.e;
+    if (_.ct < _.dt) return;
+
+    if (_.x < 160) {
+      _.x += ($.e / 1000) * _.sp;
+    } else {
+      _.x = 160;
+      _.cl = 1;
+    }
+  };
+
+  _.r = function() {
+    $.x.s();
+    $.x.fs("#2f4f4f");
+    $.x.fr(_.x, _.y, _.w, 60);
+    $.x.fr(_.x, 200, _.w, 280);
+    $.x.fr(_.x, _.y, 30, 250);
+    $.x.fr(_.x + _.w - 30, _.y, 30, 250);
+    $.x.fr(_.x + 150, _.y, 20, 250);
+    $.x.fr(_.x + 70, _.y, 20, 250);
+    $.x.fr(_.x + 230, _.y, 20, 250);
+    $.x.r();
+  };
+};

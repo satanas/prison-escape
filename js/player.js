@@ -42,3 +42,19 @@ var Player = function() {
     $.x.r();
   };
 };
+
+var GameOverPlayer = function() {
+  var _ = this;
+  _.inherits(Sprite);
+  Sprite.call(_, 280, 120, 80, 160);
+
+  _.u = function() {
+  };
+
+  _.r = function() {
+    $.x.s();
+    $.x.fs("red");
+    $.x.fr(_.x, _.y, _.w, _.h);
+    $.x.r();
+  };
+};
