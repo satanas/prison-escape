@@ -1,6 +1,6 @@
 var Bullet = function(x, y) {
   var _ = this;
-  _.sp = 400;
+  _.sp = 600;
   _.inherits(Sprite);
   Sprite.call(_, x, y, 8, 8);
 
