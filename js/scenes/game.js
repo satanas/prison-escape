@@ -40,6 +40,10 @@ var GameScene = function() {
     $.g.w.u();
     _.p.u();
 
+    if (_.p.hp <= 0) {
+      $.sp = 0;
+    }
+
     // Render
     _.px3.r();
     _.px2.r();

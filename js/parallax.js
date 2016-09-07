@@ -19,13 +19,9 @@ var BaseParallax = function(w, sp, sf, dw) {
   _.fs = function(c) {
     _.cx.fillStyle = c;
   };
-  // Set new speed
-  _.ss = function(s) {
-    _.sp = s * _.sf;
-  };
 
   _.u = function(e) {
-    _.dt += ($.e / 1000) * _.sp;
+    _.dt += ($.e / 1000) * ($.sp * _.sf);
     _.off = _.dt % _.w;
   };
 

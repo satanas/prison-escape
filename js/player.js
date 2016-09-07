@@ -2,13 +2,14 @@ var Player = function() {
   var _ = this;
   // Possible heights
   _.hs = [106, 246, 386];
-  // Height index
-  _.hi = 1;
+  _.hi = 1; // Height index
   _.cc = 0; // Collected coins
+  _.hp = 3;
   _.inherits(Sprite);
   Sprite.call(_, 120, _.hs[_.hi], 48, 64);
 
   _.u = function() {
+    if (_.hp <= 0) return;
     // Up
     if ($.i.d(38)) {
       _.hi = (_.hi - 1 < 0) ? 0 : _.hi - 1;
@@ -21,9 +22,16 @@ var Player = function() {
     }
     _.ur();
 
+    // Collisions with coins
     $.g.c.c(_, function(p, c) {
       c.a = 0;
       _.cc += 1;
+    });
+
+    // Collisions with enemies
+    $.g.e.c(_, function(p, e) {
+      _.hp -= 1;
+      e.a = 0;
     });
     $.i.c();
   };
