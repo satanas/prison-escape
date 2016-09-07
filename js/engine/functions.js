@@ -36,4 +36,7 @@ var abs = Math.abs,
     // Choose random element from array
     rnde = function(e) {
       return e[rndr(0, e.length)];
+    },
+    lim = function(x, y) {
+      return (x > y) ? y : x;
     };
