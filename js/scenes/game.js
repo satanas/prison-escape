@@ -3,7 +3,9 @@ var GameScene = function() {
   _.inherits(Scene);
   Scene.call(_);
 
-  _.dt = 0; // Distance traveled
+  // Global variables
+  $.dt = 0; // Distance traveled
+  $.cc = 0; // Collected coins
   _.de = 100000; // Distance to escape
   $.sp = 550; // Speed in pixels per second
 
@@ -28,7 +30,7 @@ var GameScene = function() {
 
   _.update = function() {
     $.x.clr('#1e4458');
-    _.dt += ($.e / 1000) * $.sp;
+    $.dt += ($.e / 1000) * $.sp;
 
     // Update
     _.px3.u();
@@ -40,10 +42,6 @@ var GameScene = function() {
     $.g.w.u();
     _.p.u();
 
-    if (_.p.hp <= 0) {
-      $.sp = 0;
-    }
-
     // Render
     _.px3.r();
     _.px2.r();
@@ -54,6 +52,11 @@ var GameScene = function() {
     _.p.r();
     $.g.pb.r();
     $.g.w.r();
+
+    if (_.p.hp <= 0) {
+      $.sp = 0;
+      _.fout($.scn.menu, 1500);
+    }
 
     // This is to avoid wormholes:
     // https://hacks.mozilla.org/2011/08/animating-with-javascript-from-setinterval-to-requestanimationframe/
