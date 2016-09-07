@@ -5,7 +5,6 @@ var GameScene = function() {
 
   _.dt = 0; // Distance traveled
   _.de = 100000; // Distance to escape
-  _.xc = 300; // Max coins per play
   $.sp = 250; // Speed in pixels per second
 
   _.p = new Player();
@@ -13,6 +12,7 @@ var GameScene = function() {
   $.g.p = new Group(); // Platforms
   $.g.pb = new Group(); // Player bullets
   $.g.c = new Group(); // Coins
+  $.g.e = new Group(); // Enemies
 
   _.px1 = new Parallax1($.sp);
   _.px2 = new Parallax2($.sp);
@@ -22,30 +22,12 @@ var GameScene = function() {
   $.g.p.a(new Platform(310));
   $.g.p.a(new Platform(450));
 
+  // 1. Choose line
+  // 2. Random base X
+  // 3. Check no coins
 
-  var spawnCoinsSegment = function(x, y, n) {
-    for (var i=0; i<n; i++) {
-      $.g.c.a(new Coin(x + (50 * i), y));
-    }
-    return n * 74;
-  };
-
-  var spawnCoins = function() {
-    var b, s, y, n;
-    b = rndr(700, 1000);
-
-    while (_.xc > 0) {
-      y = rnde([0, 1, 2]);
-      n = rndr(3, 10);
-      n = (_.xc >= n) ? n : _.xc;
-
-      b += spawnCoinsSegment(b, y, n);
-      _.xc -= n;
-      b += rndr(200, 700)
-    }
-  };
-
-  spawnCoins();
+  _.lvl = new Level();
+  _.lvl.gen();
 
   _.update = function() {
     $.x.clr('#1e4458');
