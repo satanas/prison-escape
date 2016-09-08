@@ -34,7 +34,6 @@ var GameScene = function() {
 
   _.update = function() {
     $.x.clr('#1e4458');
-    $.sp = _.mis + ($.dt * _.mxs) / _.de;
     $.dt += ($.e / 1000) * $.sp;
 
     // Update
@@ -61,6 +60,8 @@ var GameScene = function() {
     if (_.p.hp <= 0) {
       $.sp = 0;
       _.fout($.scn.gover, 1500);
+    } else {
+      $.sp = _.mis + ($.dt * _.mxs) / _.de;
     }
 
     // This is to avoid wormholes:

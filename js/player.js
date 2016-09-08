@@ -4,11 +4,15 @@ var Player = function() {
   _.hs = [106, 246, 386];
   _.hi = 1; // Height index
   _.hp = 3;
+  _.sd = 350; // Shooting Delay
+  _.sc = 0; // Shooting Counter
   _.inherits(Sprite);
   Sprite.call(_, 120, _.hs[_.hi], 48, 64);
 
   _.u = function() {
     if (_.hp <= 0) return;
+    if (_.sc > 0) _.sc -= $.e;
+
     // Up
     if ($.i.d(38)) {
       _.hi = (_.hi - 1 < 0) ? 0 : _.hi - 1;
@@ -17,7 +21,10 @@ var Player = function() {
       _.hi = (_.hi + 1 > _.hs.length - 1) ? _.hs.length - 1 : _.hi + 1;
       _.y = _.hs[_.hi];
     } else if ($.i.d(32)) {
-      $.g.pb.a(new Bullet(_.x + _.w, _.y + (_.h/ 2)));
+      if (_.sc <= 0) {
+        _.sc = _.sd;
+        $.g.pb.a(new Bullet(_.x + _.w, _.y + (_.h/ 2)));
+      }
     }
     _.ur();
 
