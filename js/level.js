@@ -25,6 +25,15 @@ var Level = function() {
     spawnExplosives();
     spawnRunningEnemies();
     spawnLaserWalls();
+    console.log(_.lep());
+  };
+
+  // Last enemy
+  _.lep = function() {
+    var la = function(y) {
+      return _.pos.e[y][_.pos.e[y].length - 1][1];
+    };
+    return max(la(0), la(1), la(2));
   };
 
   var spawnCoinsSegment = function(x, y, n) {
