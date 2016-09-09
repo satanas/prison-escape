@@ -32,7 +32,7 @@ var GameScene = function() {
   _.lvl = new Level();
   _.lvl.gen();
   //$.de = _.lvl.lep();
-  $.de = 2000;
+  $.de = 6000;
 
   _.update = function() {
     $.x.clr('#1e4458');

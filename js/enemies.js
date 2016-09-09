@@ -99,18 +99,20 @@ var LaserWall = function(x, y) {
   // Possible heights
   _.hs = [60, 200, 340];
   _.inherits(Sprite);
-  Sprite.call(_, x, _.hs[y], 12, 110);
+  Sprite.call(_, x, _.hs[y], 11, 110);
+  _.an = new Animator([17, 11], 100);
 
   _.u = function() {
     _.x -= $.e / 1000 * $.sp;
     _.ur();
+    _.an.u();
     if (_.b.r < 0) _.a = 0;
   };
 
   _.r = function() {
     $.x.s();
-    $.x.fs("green");
-    $.x.fr(_.x, _.y, _.w, _.h);
+    $.x.fs("#00ff34");
+    $.x.fr(_.x - (_.an.g() - 7) / 2, _.y, _.an.g(), _.h);
     $.x.r();
   };
 };
