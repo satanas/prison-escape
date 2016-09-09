@@ -22,6 +22,7 @@ $.init = function(w, h) {
   $.cam = new Camera($.vw, $.vh);
   // Game Scenes
   $.scn = {};
+  $.svg = new SVG();
   // Rename common used methods
   // FIXME: use a local var until the end (to avoid repeating $.x)
   $.x.s = $.x.save;
