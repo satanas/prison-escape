@@ -78,8 +78,18 @@ var Explosive = function(x, y) {
 
   _.r = function() {
     $.x.s();
-    $.x.fs("purple");
+    $.x.fs("#e20000");
     $.x.fr(_.x, _.y, _.w, _.h);
+    $.x.fs("#ffff00");
+    $.x.bp();
+    $.x.mv(_.x + 24, _.y + 8);
+    $.x.lt(_.x + 40, _.y + 40);
+    $.x.lt(_.x + 8, _.y + 40);
+    $.x.lt(_.x + 24, _.y + 8);
+    $.x.f();
+    $.x.fs("black");
+    $.x.fr(_.x + 22, _.y + 20, 5, 13);
+    $.x.fr(_.x + 22, _.y + 35, 5, 4);
     $.x.r();
   };
 };
