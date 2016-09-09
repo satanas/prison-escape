@@ -6,7 +6,7 @@ var GameScene = function() {
   // Global variables
   $.dt = 0; // Distance traveled
   $.cc = 0; // Collected coins
-  _.de = 100000; // Distance to escape
+  _.de = 100000; // Min distance to escape
   $.sp = 0; // Speed in pixels per second
   _.mis = 300; // Min speed
   _.mxs = 900; // Max speed
@@ -31,6 +31,8 @@ var GameScene = function() {
 
   _.lvl = new Level();
   _.lvl.gen();
+  //$.de = _.lvl.lep();
+  $.de = 2000;
 
   _.update = function() {
     $.x.clr('#1e4458');
@@ -40,10 +42,12 @@ var GameScene = function() {
     _.px3.u();
     _.px2.u();
     _.px1.u();
-    $.g.pb.u();
-    $.g.c.u();
-    $.g.e.u();
-    $.g.w.u();
+    if ($.dt < $.de) {
+      $.g.e.u();
+      $.g.c.u();
+      $.g.pb.u();
+      $.g.w.u();
+    }
     _.p.u();
 
     // Render
@@ -51,17 +55,24 @@ var GameScene = function() {
     _.px2.r();
     _.px1.r();
     $.g.p.r();
-    $.g.e.r();
-    $.g.c.r();
+    if ($.dt < $.de) {
+      $.g.e.r();
+      $.g.c.r();
+      $.g.pb.r();
+      $.g.w.r();
+    }
     _.p.r();
-    $.g.pb.r();
-    $.g.w.r();
 
     if (_.p.hp <= 0) {
       $.sp = 0;
       _.fout($.scn.gover, 1500);
-    } else {
+    } else if ($.dt < $.de) {
       $.sp = _.mis + ($.dt * _.mxs) / _.de;
+    }
+
+    // Player escaped
+    if (_.p.esc()) {
+      _.end();
     }
 
     // This is to avoid wormholes:
@@ -69,4 +80,12 @@ var GameScene = function() {
     //if (.e < 160) {
     //}
   };
+
+  _.end = function() {
+    $.x.s();
+    $.x.fs('rgba(0,0,0,0.15');
+    $.x.fr(0, 0, $.vw, $.vh);
+    $.x.ct('You escaped!', 75, 120, 0, 0, "small-caps bold");
+    $.x.r();
+  }
 };
