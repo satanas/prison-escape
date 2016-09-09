@@ -40,6 +40,7 @@ $.init = function(w, h) {
   $.x.bp = $.x.beginPath;
   $.x.mv = $.x.moveTo;
   $.x.lt = $.x.lineTo;
+  $.x.e = $.x.ellipse;
   // fillRect
   $.x.fr = function(x, y, w, h) {
     // To avoid anti-aliasing
