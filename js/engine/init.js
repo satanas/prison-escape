@@ -31,7 +31,6 @@ $.init = function(w, h) {
   $.x.k = $.x.stroke;
   $.x.tn = $.x.translate;
   $.x.ro = $.x.rotate;
-  $.x.ft = $.x.fillText;
   $.x.sr = $.x.strokeRect;
   $.x.cr = $.x.clearRect;
   $.x.mt = $.x.measureText;
@@ -64,6 +63,35 @@ $.init = function(w, h) {
   $.x.ga = function(a) {
     $.x.globalAlpha = a;
   };
+  // Set text style
+  // s: font size
+  // c: font color
+  // f: family
+  // v: variant
+  $.x.ts = function(s, c, f, v) {
+    f = f || "serif";
+    v = v || "";
+    $.x.fs(c || "#000");
+    $.x.font = v + " " + String(s) + "px " + f;
+  };
+  // Render text
+  // t: text
+  // s: size
+  // x: x coordinate
+  // y: y coordinate
+  // c: font color
+  // f: family
+  // v: variant
+  // j: justification ('l' for left, 'r' for right)
+  $.x.ft = function(t, s, x, y, c, f, v, j) {
+    j = j || 'l';
+    $.x.ts(s, c, f, v);
+    if (j === 'r') {
+      var m = $.x.mt(t);
+      x = x - m.width;
+    }
+    $.x.fillText(t, x, y);
+  };
   // Render centered text
   // t: text
   // s: size
@@ -72,12 +100,9 @@ $.init = function(w, h) {
   // f: family
   // v: variant
   $.x.ct = function(t, s, y, c, f, v) {
-    f = f || "serif";
-    v = v || '';
-    $.x.fs(c || "#000");
-    $.x.font = v + " " + String(s) + "px " + f;
-    var x = $.x.mt(t);
-    $.x.ft(t, ($.vw - x.width) / 2, y);
+    $.x.ts(s, c, f, v);
+    var m = $.x.mt(t);
+    $.x.fillText(t, ($.vw - m.width) / 2, y);
   };
 };
 
