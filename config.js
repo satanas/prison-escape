@@ -10,6 +10,7 @@ module.exports = {
     "js/engine/collisions.js",
     "js/engine/svg.js",
     "js/engine/animator.js",
+    "js/engine/sound.js",
     "js/engine/init.js",
 
     "js/scenes/menu.js",

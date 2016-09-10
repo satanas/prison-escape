@@ -46,6 +46,7 @@ var Player = function() {
     $.g.c.c(_, function(p, c) {
       c.a = 0;
       $.cc += 1;
+      $.s.p('c');
     });
 
     // Collisions with enemies
