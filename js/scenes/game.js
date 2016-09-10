@@ -34,6 +34,7 @@ var GameScene = function() {
   //$.de = _.lvl.lep();
   $.de = 6000;
 
+  _.hud = new HUD(_.p);
   $.g.w.a(new Instructions());
 
   _.update = function() {
@@ -49,6 +50,7 @@ var GameScene = function() {
       $.g.c.u();
       $.g.pb.u();
       $.g.w.u();
+      _.hud.u();
     }
     _.p.u();
 
@@ -62,6 +64,7 @@ var GameScene = function() {
       $.g.c.r();
       $.g.pb.r();
       $.g.w.r();
+      _.hud.r();
     }
     _.p.r();
 
