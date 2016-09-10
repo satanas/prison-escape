@@ -53,6 +53,8 @@ var Player = function() {
     $.g.e.c(_, function(p, e) {
       _.hp -= 1;
       e.a = 0;
+      if (e.n === 'exp') $.s.p('xp');
+      if (e.n === 'cop') $.s.p('hu');
     });
     $.i.c();
   };
@@ -91,8 +93,9 @@ var IntroPlayer = function() {
   _.md = 40; // Max displacement
   _.wd = 500; // Waiting Delay
   _.c = 0; // Counter
+  _.cf = 0; // Current frame
 
-  _.an = new Animator([$.svg.n(data.p[0], 40, 64), $.svg.n(data.p[1], 40, 64)], 100);
+  _.an = new Animator([$.svg.n(data.p[0], 40, 64), $.svg.n(data.p[1], 40, 64)], 150);
 
   _.u = function() {
     if (_.c <= 0) {
@@ -113,12 +116,21 @@ var IntroPlayer = function() {
     } else {
       _.c -= $.e;
     }
+
+    if (_.an.g() !== _.cf) {
+      $.s.p('st');
+      _.cf = _.an.g();
+    }
   };
 
   // Run away
   _.ra = function() {
     _.an.u();
     _.x += _.rsp * ($.e / 1000);
+    if (_.an.g() !== _.cf) {
+      $.s.p('st');
+      _.cf = _.an.g();
+    }
   };
 
   _.r = function() {

@@ -20,11 +20,15 @@ var IntroScene = function() {
       _.c = 0;
       _.ss += 1;
       if (_.ss === 4) _.bs.s();
-      if (_.ss === 6) _.gc = 0;
+      if (_.ss === 5) $.s.p('si');
+      if (_.ss === 6) {
+        _.gc = 0;
+        $.s.p('do');
+      }
+      if (_.ss === 7) _.p.an.d = 70;
     }
-    console.log(_.ss, _.sd[_.ss]);
 
-    if (_.ss <= 4) _.p.u();
+    if (_.ss < 4) _.p.u();
     if (_.ss === 7) _.p.ra();
 
     _.dj();
