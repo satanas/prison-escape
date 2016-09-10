@@ -39,6 +39,11 @@ var Scene = function() {
   _.loop = function() {
     // Calculate elapsed time
     $.e = (_.t.s !== 0) ? now() - _.t.s : 0;
+    // This is to avoid wormholes:
+    // https://hacks.mozilla.org/2011/08/animating-with-javascript-from-setinterval-to-requestanimationframe/
+    //if (.e < 160) {
+    //}
+
     // Update scene
     _.update();
 
