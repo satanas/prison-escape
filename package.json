@@ -1,0 +1,28 @@
+{
+  "name": "die-fast",
+  "version": "0.0.0",
+  "description": "My entry for the js13k compo 2015",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/satanas/#.git"
+  },
+  "author": "Wil Alvarez",
+  "license": "MIT",
+  "homepage": "https://github.com/satanas/#",
+  "devDependencies": {
+    "gulp": "^3.8.7",
+    "gulp-clean": "^0.3.1",
+    "gulp-concat": "^2.3.5",
+    "gulp-minify-css": "^0.3.8",
+    "gulp-minify-html": "^0.1.5",
+    "gulp-uglify": "^1.0.1",
+    "gulp-zip": "^2.0.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-replace": "^0.5.4",
+    "gulp-size": "^2.0.0"
+  }
+}
