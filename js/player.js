@@ -9,12 +9,8 @@ var Player = function() {
   _.rs = 180; // Running speed
   _.inherits(Sprite);
   Sprite.call(_, 120, _.hs[_.hi], 40, 64);
-  var x = '<g><rect fill="#ff930f" height="32" id="1" stroke="#000" stroke-opacity="null" stroke-width="0" width="40" x="0" y="26"/><rect fill="#ffd4aa" height="24" id="2" stroke="#000" stroke-opacity="null" stroke-width="0" width="40" x="0" y="2"/><rect fill="#000000" height="5" id="3" stroke="#000" stroke-opacity="null" stroke-width="0" width="4" x="34" y="11"/><rect fill="#000000" height="5" id="4" stroke="#000" stroke-opacity="null" stroke-width="0" width="4" x="22" y="11"/><rect fill="#ff930f" height="8" id="5" stroke="#000" stroke-opacity="null" stroke-width="0" width="8" x="10" y="56"/><rect fill="#ff930f" height="8" id="6" stroke="#000" stroke-opacity="null" stroke-width="0" width="8" x="23" y="56"/></g>';
-  var y = '<g><rect fill="#ff930f" height="32" id="1" stroke="#000" stroke-opacity="null" stroke-width="0" width="40" x="0" y="24"/><rect fill="#ffd4aa" height="24" id="2" stroke="#000" stroke-opacity="null" stroke-width="0" width="40" x="0" y="0"/><rect fill="#000000" height="5" id="3" stroke="#000" stroke-opacity="null" stroke-width="0" width="4" x="34" y="9"/><rect fill="#000000" height="5" id="4" stroke="#000" stroke-opacity="null" stroke-width="0" width="4" x="22" y="9"/><rect fill="#ff930f" height="8" id="5" stroke="#000" stroke-opacity="null" stroke-width="0" width="8" x="5" y="56"/><rect fill="#ff930f" height="8" id="6" stroke="#000" stroke-opacity="null" stroke-width="0" width="8" x="25" y="56"/></g>';
-  _.src1 = $.svg.n(x, 40, 64);
-  _.src2 = $.svg.n(y, 40, 64);
 
-  _.an = new Animator([_.src1, _.src2], 100);
+  _.an = new Animator([$.svg.n(data.p[0], 40, 64), $.svg.n(data.p[1], 40, 64)], 100);
 
   _.esc = function() {
     return (_.x > $.vw);
@@ -79,6 +75,60 @@ var GameOverPlayer = function() {
     $.x.s();
     $.x.fs("red");
     $.x.fr(_.x, _.y, _.w, _.h);
+    $.x.r();
+  };
+};
+
+var IntroPlayer = function() {
+  var _ = this;
+  _.ox = 320;
+  _.inherits(Sprite);
+  Sprite.call(_, _.ox, 256, 40, 64);
+  _.d = 0; // Direction
+  _.sp = 60; // Walking speed
+  _.rsp = 300; // Run away speed
+  _.md = 40; // Max displacement
+  _.wd = 500; // Waiting Delay
+  _.c = 0; // Counter
+
+  _.an = new Animator([$.svg.n(data.p[0], 40, 64), $.svg.n(data.p[1], 40, 64)], 100);
+
+  _.u = function() {
+    if (_.c <= 0) {
+      _.an.u();
+      if (_.d === 1) {
+        _.x += _.sp * ($.e / 1000);
+        if (_.x >= _.ox + _.md) {
+          _.d = 0;
+          _.c = _.wd;
+        }
+      } else if (_.d === 0) {
+        _.x -= _.sp * ($.e / 1000);
+        if (_.x <= _.ox - _.md) {
+          _.d = 1;
+          _.c = _.wd;
+        }
+      }
+    } else {
+      _.c -= $.e;
+    }
+  };
+
+  // Run away
+  _.ra = function() {
+    _.an.u();
+    _.x += _.rsp * ($.e / 1000);
+  };
+
+  _.r = function() {
+    $.x.s();
+    if (!_.d) {
+      //$.x.tn(_.w, 0)
+      //$.x.sc(-1, 1);
+      $.x.di(_.an.g(), _.x, _.y);
+    } else {
+      $.x.di(_.an.g(), _.x, _.y);
+    }
     $.x.r();
   };
 };
