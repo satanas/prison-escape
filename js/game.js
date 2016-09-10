@@ -17,6 +17,7 @@ window.addEventListener('load', function() {
   $.scn.menu = new MenuScene();
   $.scn.game = new GameScene();
 
-  $.scn.menu.loop();
-  //$.scn.gover.loop();
+  $.scn.intro = new IntroScene();
+  $.scn.intro.loop();
+  //$.scn.menu.loop();
 });

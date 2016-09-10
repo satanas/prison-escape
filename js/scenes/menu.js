@@ -32,7 +32,8 @@ var MenuScene = function() {
 
     if ($.i.p(13) && _.rdy) {
       _.exit();
-      $.scn.game.start();
+      $.scn.intro = new IntroScene();
+      $.scn.intro.start();
     }
   };
 };
