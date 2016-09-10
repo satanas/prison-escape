@@ -76,3 +76,23 @@ var Door = function() {
     $.x.r();
   };
 };
+
+// In-game instructions
+var Instructions = function() {
+  var _ = this;
+  _.inherits(Sprite);
+  Sprite.call(_, 0, 200, $.vw, 200);
+  _.it = 2500; // Instructions time
+
+  _.u = function() {
+    _.it -= $.e;
+    if (_.it < 0) _.a = 0;
+  };
+
+  _.r = function() {
+    $.x.s();
+    $.x.ct('Up and Down arrows to move', 16, 395, 'white', 'courier');
+    $.x.ct('Space to shoot', 16, 420, 'white', 'courier');
+    $.x.r();
+  };
+}

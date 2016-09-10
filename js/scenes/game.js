@@ -34,6 +34,8 @@ var GameScene = function() {
   //$.de = _.lvl.lep();
   $.de = 6000;
 
+  $.g.w.a(new Instructions());
+
   _.update = function() {
     $.x.clr('#1e4458');
     $.dt += ($.e / 1000) * $.sp;
@@ -74,11 +76,6 @@ var GameScene = function() {
     if (_.p.esc()) {
       _.end();
     }
-
-    // This is to avoid wormholes:
-    // https://hacks.mozilla.org/2011/08/animating-with-javascript-from-setinterval-to-requestanimationframe/
-    //if (.e < 160) {
-    //}
   };
 
   _.end = function() {
