@@ -8,6 +8,7 @@ var BSOD = function(t) {
   _.s = function() {
     _.ct = _.dt;
     _.sw = 1;
+    $.s.p('bs');
   };
 
   _.u = function() {
