@@ -67,10 +67,10 @@ var Level = function() {
       for (var i=0; i<_.pos[arr[j]][y].length; i++) {
         ll = _.pos[arr[j]][y][i][0];
         rl = _.pos[arr[j]][y][i][1];
-        if (x >= ll && x <= rl) return false;
+        if (x >= ll && x <= rl) return 0;
       }
     }
-    return true
+    return 1
   };
 
   var spawnEnemies = function() {
