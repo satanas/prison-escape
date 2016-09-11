@@ -3,7 +3,7 @@ var Explosion = function(x, y, r) {
   _.inherits(Sprite);
   Sprite.call(_, x, y);
   _.rd = r || 22; // Maximum radius
-  _.pt = 55; //Phase time
+  _.pt = 45; //Phase time
   _.pc = 0; // Phase counter
   _.p = 0; // Phase
 
