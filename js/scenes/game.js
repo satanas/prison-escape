@@ -10,6 +10,12 @@ var GameScene = function() {
   $.sp = 0; // Speed in pixels per second
   _.mis = 300; // Min speed
   _.mxs = 900; // Max speed
+  _.gos = 0; // Game over sound
+  _.wis = 0; // Winning sound
+  _.fc = '#fff'; // Font color
+  _.ft = 'courier'; // Font family
+  _.fv = 'small-caps'; // Font variant
+  _.an = new Animator([0, 1], 350);
 
   $.scn.gover = new GameOverScene();
 
@@ -33,14 +39,14 @@ var GameScene = function() {
   _.lvl = new Level();
   _.lvl.gen();
   //$.de = _.lvl.lep();
-  $.de = 6000;
+  $.de = 60;
 
   _.hud = new HUD(_.p);
   $.g.w.a(new Instructions());
+  $.s.p('si');
 
   _.update = function() {
     $.x.clr('#1e4458');
-    $.dt += ($.e / 1000) * $.sp;
 
     // Update
     _.px3.u();
@@ -74,6 +80,10 @@ var GameScene = function() {
     if (_.p.hp <= 0) {
       $.sp = 0;
       _.fout($.scn.gover, 1500);
+      if (!_.gos) {
+        $.s.p('go');
+        _.gos = 1;
+      }
     } else if ($.dt < $.de) {
       $.sp = _.mis + ($.dt * _.mxs) / _.de;
     }
@@ -81,14 +91,36 @@ var GameScene = function() {
     // Player escaped
     if (_.p.esc()) {
       _.end();
+      if (!_.wis) {
+        $.s.p('wi');
+        _.wis = 1;
+      }
+      if ($.i.p(13)) {
+        _.exit();
+        $.scn.game = new GameScene();
+        $.scn.game.start();
+      } else if ($.i.p(27)) {
+        _.exit();
+        $.scn.menu = new MenuScene();
+        $.scn.menu.start();
+      }
+    } else {
+      $.dt += ($.e / 1000) * $.sp;
     }
   };
 
   _.end = function() {
+    _.an.u();
     $.x.s();
     $.x.fs('rgba(0,0,0,0.15');
     $.x.fr(0, 0, $.vw, $.vh);
-    $.x.ct('You escaped!', 75, 120, 0, 0, "small-caps bold");
+    $.x.ct('You escaped!', 65, 120, '#0f0', _.ft, _.fv);
+    $.x.ct('Running ' + floor($.dt / 10).toString() + ' mts to freedom', 30, 235, _.fc, _.ft, _.fv);
+    $.x.ct('And collecting ' + $.cc + ' coins', 30, 280, _.fc, _.ft, _.fv);
+    if (_.an.g()) {
+      $.x.ct('Press Enter to play again', 15, 400, 'yellow', 'courier');
+    }
+    $.x.ct('Esc to exit', 10, 440, '#999', 'courier');
     $.x.r();
   }
 };
