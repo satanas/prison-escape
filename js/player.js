@@ -7,10 +7,14 @@ var Player = function() {
   _.sd = 350; // Shooting Delay
   _.sc = 0; // Shooting Counter
   _.rs = 180; // Running speed
+  _.iv = 0; // Invincible
+  _.id = 1000; // Invincibility delay
+  _.ic = 0; // Invincibility counter
   _.inherits(Sprite);
   Sprite.call(_, 120, _.hs[_.hi], 40, 64);
 
   _.an = new Animator([$.svg.n(data.p[0], 40, 64), $.svg.n(data.p[1], 40, 64)], 100);
+  _.ia = new Animator([0, 1], 100);
 
   _.esc = function() {
     return (_.x > $.vw);
@@ -25,6 +29,13 @@ var Player = function() {
     if ($.dt > $.de) {
       if (_.x < $.vw) _.x += ($.e / 1000) * _.rs
       return;
+    }
+
+    if (_.iv) {
+      console.log('inv');
+      _.ia.u();
+      _.ic -= $.e;
+      if (_.ic <= 0) _.iv = 0;
     }
 
     // Up
@@ -50,21 +61,29 @@ var Player = function() {
     });
 
     // Collisions with enemies
-    $.g.e.c(_, function(p, e) {
-      _.hp -= 1;
-      e.a = 0;
-      if (e.n === 'cop') $.s.p('hu');
-      if (e.n === 'exp') {
-        $.g.x.a(new Explosion(_.x + (_.w / 2), _.y + (_.h / 2)));
-        $.s.p('xp');
-      }
-    });
+    if (!_.iv) {
+      $.g.e.c(_, function(p, e) {
+        _.hp -= 1;
+        _.iv = 1;
+        _.ic = _.id;
+        e.a = 0;
+        if (e.n === 'cop') $.s.p('hu');
+        if (e.n === 'exp') {
+          $.g.x.a(new Explosion(_.x + (_.w / 2), _.y + (_.h / 2)));
+          $.s.p('xp');
+        }
+      });
+    }
     $.i.c();
   };
 
   _.r = function() {
     $.x.s();
-    $.x.di(_.an.g(), _.x, _.y);
+    if (_.iv) {
+      if (_.ia.g()) $.x.di(_.an.g(), _.x, _.y);
+    } else {
+      $.x.di(_.an.g(), _.x, _.y);
+    }
     $.x.r();
   };
 };
