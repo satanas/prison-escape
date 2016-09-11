@@ -8,6 +8,7 @@ var minifyCSS = require('gulp-minify-css');
 var minifyHTML = require('gulp-minify-html');
 var clean = require('gulp-clean');
 var zip = require('gulp-zip');
+var chalk = require('chalk');
 var config = require('./config');
 
 gulp.task('minify_js', function() {
@@ -56,8 +57,14 @@ gulp.task('build', ['minify_html'], function() {
   .pipe(s)
   .pipe(gulp.dest('min'))
   .on('end', function() {
-    var r = 13312 - s.size;
-    console.log('Remaining size: ', r, 'bytes');
+    var r = (13312 - s.size) + ' bytes';
+    var time = new Date().toTimeString().slice(0, 8);
+    var sizeText;
+    if (r < 0)
+      sizeText = chalk.red(r);
+    else
+      sizeText = chalk.green(r);
+    console.log('[' + chalk.gray(time) + '] ' + chalk.yellow('Remaining size: ') + sizeText);
   });
 });
 
