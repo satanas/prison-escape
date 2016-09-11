@@ -25,7 +25,6 @@ var Level = function() {
     spawnExplosives();
     spawnRunningEnemies();
     spawnLaserWalls();
-    console.log(_.lep());
   };
 
   // Last enemy

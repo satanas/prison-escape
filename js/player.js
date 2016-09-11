@@ -4,7 +4,7 @@ var Player = function() {
   _.hs = [106, 246, 386];
   _.hi = 1; // Height index
   _.hp = 3;
-  _.sd = 350; // Shooting Delay
+  _.sd = 150; // Shooting Delay
   _.sc = 0; // Shooting Counter
   _.rs = 180; // Running speed
   _.iv = 0; // Invincible
@@ -56,6 +56,7 @@ var Player = function() {
     } else if ($.i.d(32)) {
       if (_.sc <= 0) {
         _.sc = _.sd;
+        $.s.p('sh');
         $.g.pb.a(new Bullet(_.x + _.w, _.y + (_.h/ 2)));
       }
     }
@@ -74,9 +75,9 @@ var Player = function() {
         _.hp -= 1;
         _.iv = 1;
         _.ic = _.id;
-        e.a = 0;
         if (e.n === 'cop') $.s.p('hu');
         if (e.n === 'exp') {
+          e.a = 0;
           $.g.x.a(new Explosion(_.x + (_.w / 2), _.y + (_.h / 2)));
           $.s.p('xp');
         }

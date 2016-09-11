@@ -14,8 +14,10 @@ var Cop = function(x, y) {
     if (_.b.r < 0) _.a = 0;
 
     $.g.pb.c(_, function(c, b) {
+      $.s.p('eh');
+      b.a = 0;
       _.hp -= 1;
-      if (_.hp < 0) _.a = 0;
+      if (_.hp <= 0) _.a = 0;
     });
   };
 
@@ -62,8 +64,10 @@ var RunningCop = function(x, y) {
     }
 
     $.g.pb.c(_, function(c, b) {
+      $.s.p('eh');
+      b.a = 0;
       _.hp -= 1;
-      if (_.hp < 0) _.a = 0;
+      if (_.hp <= 0) _.a = 0;
     });
   };
 
