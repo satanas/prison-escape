@@ -37,6 +37,11 @@ var IntroScene = function() {
     _.dbs();
     _.df();
 
+    if (_.ss >= 1 && $.i.d(27)) {
+      _.exit();
+      $.scn.game.start();
+    }
+
     if (_.ss === 8) _.fout($.scn.game, 1000);
   };
 
@@ -79,6 +84,7 @@ var IntroScene = function() {
       $.x.fr(_.x + 446, _.y + 39, 8, 65)
       $.x.fr(_.x + 462, _.y + 39, 8, 65)
     }
+    $.x.ct('Press Esc to skip intro', 10, 465, '#fff', 'courier');
     $.x.r();
   }
 

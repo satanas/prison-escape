@@ -50,11 +50,8 @@ var MenuScene = function() {
 
     if ($.i.p(13) && _.rdy) {
       _.exit();
-      //$.scn.intro = new IntroScene();
-      //$.scn.intro.start();
-
-      $.scn.game = new GameScene();
-      $.scn.game.start();
+      $.scn.intro = new IntroScene();
+      $.scn.intro.start();
     }
   };
 };

@@ -46,7 +46,7 @@ var Door = function() {
   var _ = this;
   _.inherits(Sprite);
   _.sp = 350; // Speed
-  _.dt = 300; // Delay before start moving
+  _.dt = 600; // Delay before start moving
   _.ct = 0; // Counter
   _.cl = 0; // Is door closed?
   Sprite.call(_, -160, 0, 320, $.vh);
@@ -57,15 +57,16 @@ var Door = function() {
 
     if (_.x < 160) {
       _.x += ($.e / 1000) * _.sp;
-    } else {
+    } else if (!_.cl) {
       _.x = 160;
       _.cl = 1;
+      $.s.p('do');
     }
   };
 
   _.r = function() {
     $.x.s();
-    $.x.fs("#2f4f4f");
+    $.x.fs("#333");
     $.x.fr(_.x, _.y, _.w, 60);
     $.x.fr(_.x, 200, _.w, 280);
     $.x.fr(_.x, _.y, 30, 250);
