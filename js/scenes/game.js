@@ -20,6 +20,7 @@ var GameScene = function() {
   $.g.c = new Group(); // Coins
   $.g.e = new Group(); // Enemies
   $.g.w = new Group(); // Warnings
+  $.g.x = new Group(); // Explosions
 
   _.px1 = new Parallax1($.sp);
   _.px2 = new Parallax2($.sp);
@@ -53,6 +54,7 @@ var GameScene = function() {
       _.hud.u();
     }
     _.p.u();
+    $.g.x.u();
 
     // Render
     _.px3.r();
@@ -67,6 +69,7 @@ var GameScene = function() {
       _.hud.r();
     }
     _.p.r();
+    $.g.x.r();
 
     if (_.p.hp <= 0) {
       $.sp = 0;

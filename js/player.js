@@ -53,8 +53,11 @@ var Player = function() {
     $.g.e.c(_, function(p, e) {
       _.hp -= 1;
       e.a = 0;
-      if (e.n === 'exp') $.s.p('xp');
       if (e.n === 'cop') $.s.p('hu');
+      if (e.n === 'exp') {
+        $.g.x.a(new Explosion(_.x + (_.w / 2), _.y + (_.h / 2)));
+        $.s.p('xp');
+      }
     });
     $.i.c();
   };
