@@ -29,14 +29,13 @@ var GameOverScene = function() {
     _.dd.r();
 
     $.x.s();
-    //$.x.fs('#7a687f');
-    $.x.fs('gray');
+    $.x.fs(data.wc);
     $.x.fr(0, 0, 160, $.vh);
     $.x.fr(480, 0, 160, $.vh);
     $.x.r();
 
     if (_.dd.cl) {
-      $.x.ct('You ran ' + floor($.dt / 100).toString() + ' mts', 50, 250, _.fc, _.ft, _.fv);
+      $.x.ct('You ran ' + cdt().toString() + ' mts', 50, 250, _.fc, _.ft, _.fv);
       $.x.ct('collected ' + $.cc + ' coins', 30, 300, _.fc, _.ft, _.fv);
       $.x.ct('and still behind bars', 30, 360, _.fc, _.ft, _.fv);
       if (_.an.g()) {

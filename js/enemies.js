@@ -35,6 +35,7 @@ var RunningCop = function(x, y) {
   _.l = y;
   _.ws = 0; // Warning sent
   _.cf = 0; // Current frame
+  _.n = 'cop';
   _.inherits(Sprite);
   Sprite.call(_, x, _.hs[y], 48, 64);
   _.an = new Animator([0, 1], 100);

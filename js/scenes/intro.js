@@ -51,7 +51,7 @@ var IntroScene = function() {
     $.x.s();
     $.x.fs('#b2b2b2');
     $.x.fr(_.x, _.y, 500, 110);
-    $.x.fs('#7a687f');
+    $.x.fs(data.wc);
     $.x.fr(_.x, _.y, 500, 20);
     $.x.fr(_.x, _.y + 110, 500, 20);
     $.x.fr(_.x, _.y, 20, 110);

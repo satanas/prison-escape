@@ -25,7 +25,7 @@ module.exports = {
     "js/level.js",
     "js/enemies.js",
     "js/bsod.js",
-    "js/data.js",
+    "js/common.js",
     "js/hud.js",
     "js/game.js"
   ]
