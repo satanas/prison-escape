@@ -10,6 +10,7 @@ var Player = function() {
   _.iv = 0; // Invincible
   _.id = 1000; // Invincibility delay
   _.ic = 0; // Invincibility counter
+  _.cf = 0; // Current frame
   _.inherits(Sprite);
   Sprite.call(_, 120, _.hs[_.hi], 40, 64);
 
@@ -26,25 +27,32 @@ var Player = function() {
 
     _.an.u();
 
+    // Step sounds
+    if (_.an.g() !== _.cf && !_.esc()) {
+      $.s.p('st2');
+      _.cf = _.an.g();
+    }
+
     if ($.dt > $.de) {
       if (_.x < $.vw) _.x += ($.e / 1000) * _.rs
       return;
     }
 
     if (_.iv) {
-      console.log('inv');
       _.ia.u();
       _.ic -= $.e;
-      if (_.ic <= 0) _.iv = 0;
+      if (_.ic <= 0 || _.hp <= 0) _.iv = 0;
     }
 
     // Up
     if ($.i.d(38)) {
       _.hi = (_.hi - 1 < 0) ? 0 : _.hi - 1;
       _.y = _.hs[_.hi];
+      $.s.p('j');
     } else if ($.i.d(40)) {
       _.hi = (_.hi + 1 > _.hs.length - 1) ? _.hs.length - 1 : _.hi + 1;
       _.y = _.hs[_.hi];
+      $.s.p('j');
     } else if ($.i.d(32)) {
       if (_.sc <= 0) {
         _.sc = _.sd;
@@ -79,7 +87,7 @@ var Player = function() {
 
   _.r = function() {
     $.x.s();
-    if (_.iv) {
+    if (_.iv && _.hp > 0) {
       if (_.ia.g()) $.x.di(_.an.g(), _.x, _.y);
     } else {
       $.x.di(_.an.g(), _.x, _.y);
