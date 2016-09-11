@@ -34,8 +34,10 @@ var RunningCop = function(x, y) {
   _.sp = 200;
   _.l = y;
   _.ws = 0; // Warning sent
+  _.cf = 0; // Current frame
   _.inherits(Sprite);
   Sprite.call(_, x, _.hs[y], 48, 64);
+  _.an = new Animator([0, 1], 100);
   _.im = $.svg.n('<g><rect fill="#718927" height="32" id="1" stroke="#000" stroke-opacity="null" stroke-width="0" width="40" x="16" y="24"/><rect fill="#ffd4aa" height="24" id="2" stroke="#000" stroke-opacity="null" stroke-width="0" width="40" x="16" y="0"/><rect fill="#005400" height="8" id="5" stroke="#000" stroke-opacity="null" stroke-width="0" width="8" x="22" y="56"/><rect fill="#005400" height="8" id="6" stroke="#000" stroke-opacity="null" stroke-width="0" width="8" x="42" y="56"/><rect fill="#005400" height="20" id="7" stroke="#000" stroke-opacity="null" stroke-width="0" width="16" x="40" y="0"/><rect fill="#005400" height="8" id="8" stroke="#000" stroke-opacity="null" stroke-width="0" width="25" x="16" y="0"/><rect fill="#cccccc" height="64" id="B" stroke="#000" stroke-opacity="null" stroke-width="0" width="12" x="0" y="0"/><rect fill="#e5e5e5" height="15" id="C" stroke="#000" stroke-opacity="null" stroke-width="0" width="23" x="16" y="8"/><rect fill="#005400" height="7" id="D" stroke="#000" stroke-opacity="null" stroke-width="0" width="25" x="16" y="24"/><rect fill="#005400" height="16" id="E" stroke="#000" stroke-opacity="null" stroke-width="0" width="16" x="16" y="31"/></g>', 56, 64);
 
   _.u = function() {
@@ -44,12 +46,19 @@ var RunningCop = function(x, y) {
       if (_.x <= 1200 && !_.ws) {
         _.ws = 1;
         $.g.w.a(new Warning(_.l));
+        $.s.p('wr');
       }
     } else {
       _.x -= $.e / 1000 * ($.sp + _.sp);
+      _.an.u();
     }
     _.ur();
     if (_.b.r < 0) _.a = 0;
+
+    if (_.an.g() !== _.cf) {
+      $.s.p('cs');
+      _.cf = _.an.g();
+    }
 
     $.g.pb.c(_, function(c, b) {
       _.hp -= 1;
