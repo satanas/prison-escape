@@ -49,11 +49,16 @@ var Door = function() {
   _.dt = 600; // Delay before start moving
   _.ct = 0; // Counter
   _.cl = 0; // Is door closed?
+  _.sm = 0; // Started moving?
   Sprite.call(_, -160, 0, 320, $.vh);
 
   _.u = function() {
     _.ct += $.e;
     if (_.ct < _.dt) return;
+    if (!_.sm) {
+      _.sm = 1;
+      $.s.p('dm');
+    }
 
     if (_.x < 160) {
       _.x += ($.e / 1000) * _.sp;
