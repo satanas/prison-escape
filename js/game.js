@@ -49,9 +49,9 @@ window.addEventListener('load', function() {
   $.s.a('m3', [0,0.1011,0.9326,0.2043,0.954,0.244,,0.0074,-0.9414,0.0635,0.102,-0.5468,0.2353,,,0.0062,0.2198,-0.0396,0.9999,0.0045,,0.0009,-0.9903,0.4]);
   $.s.a('m4', [0,0.1011,0.91,0.07,1,0.36,,0.32,-0.9414,0.16,0.102,-0.3,0.2353,,-1,0.14,-0.02,-0.0396,0.9999,0.0045,0.23,0.0009,-0.9903,0.4]);
 
-  //$.scn.menu = new MenuScene();
-  //$.scn.menu.loop();
+  $.scn.menu = new MenuScene();
+  $.scn.menu.loop();
 
-  $.scn.gover = new GameOverScene();
-  $.scn.gover.loop();
+  //$.scn.gover = new GameOverScene();
+  //$.scn.gover.loop();
 });

@@ -38,12 +38,11 @@ var GameScene = function() {
 
   _.lvl = new Level();
   _.lvl.gen();
-  //$.de = _.lvl.lep();
-  $.de = 60;
+  $.de = _.lvl.lep();
+  //$.de = 6000;
 
   _.hud = new HUD(_.p);
   $.g.w.a(new Instructions());
-  $.s.p('si');
 
   _.update = function() {
     $.x.clr('#1e4458');
@@ -115,7 +114,7 @@ var GameScene = function() {
     $.x.fs('rgba(0,0,0,0.15');
     $.x.fr(0, 0, $.vw, $.vh);
     $.x.ct('You escaped!', 65, 120, '#0f0', _.ft, _.fv);
-    $.x.ct('Running ' + floor($.dt / 10).toString() + ' mts to freedom', 30, 235, _.fc, _.ft, _.fv);
+    $.x.ct('Running ' + floor(_.de / 100).toString() + ' mts to freedom', 30, 235, _.fc, _.ft, _.fv);
     $.x.ct('And collecting ' + $.cc + ' coins', 30, 280, _.fc, _.ft, _.fv);
     if (_.an.g()) {
       $.x.ct('Press Enter to play again', 15, 400, 'yellow', 'courier');

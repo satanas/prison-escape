@@ -25,7 +25,7 @@ var HUD = function(p) {
     $.x.di(_.gh(3), 88, 18);
     $.x.ft('x', 20, 200, 35, 'white', 'sans-serif');
     $.x.ft($.cc.toString(), 28, 220, 37, 'white', 'courier');
-    $.x.ft(floor($.dt / 10).toString() + ' mts', 28, 600, 37, 'white', 'courier', '', 'r');
+    $.x.ft(floor($.dt / 100).toString() + ' mts', 28, 600, 37, 'white', 'courier', '', 'r');
     $.x.r();
 
     _.co.r();

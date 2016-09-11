@@ -36,7 +36,7 @@ var GameOverScene = function() {
     $.x.r();
 
     if (_.dd.cl) {
-      $.x.ct('You ran ' + floor($.dt / 10).toString() + ' mts', 50, 250, _.fc, _.ft, _.fv);
+      $.x.ct('You ran ' + floor($.dt / 100).toString() + ' mts', 50, 250, _.fc, _.ft, _.fv);
       $.x.ct('collected ' + $.cc + ' coins', 30, 300, _.fc, _.ft, _.fv);
       $.x.ct('and still behind bars', 30, 360, _.fc, _.ft, _.fv);
       if (_.an.g()) {
