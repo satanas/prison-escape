@@ -1,10 +1,13 @@
-var Level = function() {
+var Level = function(de, md) {
   var _ = this;
+  _.md = md; // Min distance to start showing elements
+  _.de = de; // Distance to escape
   _.xc = 300; // Max coins per game
-  _.xe = 100; // Max enemies per game
+  _.xe = 120; // Max enemies per game
   _.xx = 60; // Max explosives per game
-  _.xr = 40; // Max running cops per game
+  _.xr = 50; // Max running cops per game
   _.xw = 40; // Max laser walls per game
+  _.xh = 30; // Max hearts per game
   // Element positions (as arrays)
   _.pos = {
     c: [
@@ -16,15 +19,16 @@ var Level = function() {
       [],
       [],
       []
-    ],
+    ]
   };
 
   _.gen = function() {
-    spawnCoins();
-    spawnEnemies();
-    spawnExplosives();
-    spawnRunningEnemies();
-    spawnLaserWalls();
+    spwCoins();
+    _.spawn(_.xe, 0, 50, 'e', Cop);
+    _.spawn(_.xx, 200, 50, 'e', Explosive);
+    _.spawn(_.xr, 500, 50, 'e', RunningCop);
+    _.spawn(_.xw, 1000, 10, 'e', LaserWall);
+    _.spawn(_.xh, 8000, 25, 'c', Heart);
   };
 
   // Last enemy
@@ -35,31 +39,7 @@ var Level = function() {
     return max(la(0), la(1), la(2));
   };
 
-  var spawnCoinsSegment = function(x, y, n) {
-    for (var i=0; i<n; i++) {
-      $.g.c.a(new Coin(x + (50 * i), y));
-    }
-    return n * 74;
-  };
-
-  var spawnCoins = function() {
-    var b, s, y, n, bb;
-    b = rndr(700, 1000);
-
-    while (_.xc > 0) {
-      y = rnde([0, 1, 2]);
-      n = rndr(3, 10);
-      n = (_.xc >= n) ? n : _.xc;
-
-      bb = b - 50;
-      b += spawnCoinsSegment(b, y, n);
-      _.xc -= n;
-      _.pos.c[y].push([bb, b]);
-      b += rndr(200, 700)
-    }
-  };
-
-  var isEmpty = function(x, y) {
+  _.empty = function(x, y) {
     var arr = Object.keys(_.pos), ll, rl;
 
     for (var j=0; j<arr.length; j++) {
@@ -72,69 +52,54 @@ var Level = function() {
     return 1
   };
 
-  var spawnEnemies = function() {
-    var b = 0, y, bb;
+  var _spwCoinsSeg = function(x, y, n) {
+    for (var i=0; i<n; i++) {
+      $.g.c.a(new Coin(x + (50 * i), y));
+    }
+    return n * 74;
+  };
 
-    while (_.xe > 0) {
-      bb = b + rndr(800, 1200);
+  var spwCoins = function() {
+    var b, s, y, n, bb;
+    b = rndr(700, 1000);
+
+    while (_.xc > 0) {
       y = rnde([0, 1, 2]);
+      n = rndr(3, 10);
+      n = (_.xc >= n) ? n : _.xc;
 
-      if (!isEmpty(bb, y)) continue;
-
-      b = bb;
-      _.xe -= 1;
-      _.pos.e[y].push([b - 50, b + 100]);
-      $.g.e.a(new Cop(b, y));
+      bb = b - 50;
+      b += _spwCoinsSeg(b, y, n);
+      _.xc -= n;
+      _.pos.c[y].push([bb, b]);
+      b += rndr(200, 700)
     }
   };
 
-  var spawnExplosives = function() {
-    var b = 0, y, bb;
+  // n: number of elements
+  // b: base distance for first element to show up
+  // w: width separation for each element
+  // t: type of element (c: collectible, e: enemy)
+  // cl: class to be instantiated
+  _.spawn = function(n, b, w, t, cl) {
+    var y, bb,
+        th = rnde([300, 400, 500]); // Threshold to randomize separation between elements
+        cr = (_.de - _.md - b) / n, // Calculated range
+        sr = cr - th, // Start range
+        er = cr + th; // End range
 
-    while (_.xx > 0) {
-      bb = b + rndr(1400, 1800);
+    b += _.md;
+
+    while (n > 0) {
+      bb = b + rndr(sr, er);
       y = rnde([0, 1, 2]);
 
-      if (!isEmpty(bb, y)) continue;
+      if (!_.empty(bb, y)) continue;
 
       b = bb;
-      _.xx -= 1;
-      _.pos.e[y].push([b - 50, b + 100]);
-      $.g.e.a(new Explosive(b, y));
+      n -= 1;
+      _.pos[t][y].push([b - w, b + (w * 2)]);
+      $.g[t].a(new cl(b, y));
     }
   };
-
-  var spawnLaserWalls = function() {
-    var b = 1000, y, bb;
-
-    while (_.xw > 0) {
-      bb = b + rndr(2200, 2700);
-      y = rnde([0, 1, 2]);
-
-      if (!isEmpty(bb, y)) continue;
-
-      b = bb;
-      _.xw -= 1;
-      _.pos.e[y].push([b - 10, b + 10]);
-      $.g.e.a(new LaserWall(b, y));
-    }
-  };
-
-  var spawnRunningEnemies = function() {
-    var b = 0, y, bb;
-
-    while (_.xr > 0) {
-      bb = b + rndr(2200, 2700);
-      y = rnde([0, 1, 2]);
-
-      if (!isEmpty(bb, y)) continue;
-
-      b = bb;
-      _.xr -= 1;
-      _.pos.e[y].push([b - 50, b + 100]);
-      $.g.e.a(new RunningCop(b, y));
-    }
-  };
-
-  $.g.e.a(new RunningCop(1200, 1));
 };

@@ -23,7 +23,7 @@ var GameScene = function() {
   // Groups
   $.g.p = new Group(); // Platforms
   $.g.pb = new Group(); // Player bullets
-  $.g.c = new Group(); // Coins
+  $.g.c = new Group(); // Collectibles
   $.g.e = new Group(); // Enemies
   $.g.w = new Group(); // Warnings
   $.g.x = new Group(); // Explosions
@@ -36,7 +36,7 @@ var GameScene = function() {
   $.g.p.a(new Platform(310));
   $.g.p.a(new Platform(450));
 
-  _.lvl = new Level();
+  _.lvl = new Level(_.de, 1000);
   _.lvl.gen();
   $.de = _.lvl.lep();
   //$.de = 6000;
