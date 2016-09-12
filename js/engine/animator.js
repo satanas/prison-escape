@@ -8,6 +8,7 @@ var Animator = function(arr, d, f) {
   _.d = d; // Frame duration
   _.c = 0; // Animation counter
   _.f = f || 0; // Frame index
+  _.cb = 0; // Callback to be called on every frame change
 
   // Update
   _.u = function() {
@@ -16,11 +17,12 @@ var Animator = function(arr, d, f) {
       _.c = 0;
       _.f += 1;
       _.f = (_.f > _.arr.length - 1) ? 0 : _.f;
+      if (_.cb) _.cb(_.f);
     }
   };
 
   // Get frame
   _.g = function() {
     return _.arr[_.f];
-  }
+  };
 };

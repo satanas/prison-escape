@@ -11,12 +11,15 @@ var Player = function() {
   _.iv = 0; // Invincible
   _.id = 1000; // Invincibility delay
   _.ic = 0; // Invincibility counter
-  _.cf = 0; // Current frame
   _.inherits(Sprite);
   Sprite.call(_, 120, _.hs[_.hi], 40, 64);
 
   _.an = new Animator([$.svg.n(data.p[0], 40, 64), $.svg.n(data.p[1], 40, 64)], 100);
-  _.ia = new Animator([0, 1], 100);
+  _.an.cb = function(i) {
+    // Step sounds
+    $.s.p('st');
+  };
+  _.ia = new Animator([0, 1], 100); // Invincibility animator
 
   _.esc = function() {
     return (_.x > $.vw);
@@ -27,12 +30,6 @@ var Player = function() {
     if (_.sc > 0) _.sc -= $.e;
 
     _.an.u();
-
-    // Step sounds
-    if (_.an.g() !== _.cf && !_.esc()) {
-      $.s.p('st2');
-      _.cf = _.an.g();
-    }
 
     if ($.dt > $.de) {
       if (_.x < $.vw) _.x += ($.e / 1000) * _.rs
@@ -143,9 +140,11 @@ var IntroPlayer = function() {
   _.md = 40; // Max displacement
   _.wd = 500; // Waiting Delay
   _.c = 0; // Counter
-  _.cf = 0; // Current frame
 
   _.an = new Animator([$.svg.n(data.p[0], 40, 64), $.svg.n(data.p[1], 40, 64)], 150);
+  _.an.cb = function(i) {
+    $.s.p('st');
+  };
 
   _.u = function() {
     if (_.c <= 0) {
@@ -166,21 +165,16 @@ var IntroPlayer = function() {
     } else {
       _.c -= $.e;
     }
-
-    if (_.an.g() !== _.cf) {
-      $.s.p('st');
-      _.cf = _.an.g();
-    }
   };
 
   // Run away
   _.ra = function() {
     _.an.u();
     _.x += _.rsp * ($.e / 1000);
-    if (_.an.g() !== _.cf) {
-      $.s.p('st');
-      _.cf = _.an.g();
-    }
+    //if (_.an.g() !== _.cf) {
+    //  $.s.p('st');
+    //  _.cf = _.an.g();
+    //}
   };
 
   _.r = function() {
@@ -193,5 +187,22 @@ var IntroPlayer = function() {
       $.x.di(_.an.g(), _.x, _.y);
     }
     $.x.r();
+  };
+};
+
+var Powering = function() {
+  _.t = 3000; // Power up time
+  _.c = 0; // Counter
+  _.p = 0; // Power up (1: adrenaline, 2: s-weapon)
+  //_.an = new Animator([0, 1], )
+
+  _.u = function() {
+    if (_.p > 0) _.c -= $.e;
+  };
+
+  // Set power up
+  _.s = function(p) {
+    _.p = p;
+    _.c = _.t;
   };
 };

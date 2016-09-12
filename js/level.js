@@ -102,4 +102,6 @@ var Level = function(de, md) {
       $.g[t].a(new cl(b, y));
     }
   };
+
+  $.g.c.a(new Heart(350, 1));
 };
