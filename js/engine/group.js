@@ -42,4 +42,9 @@ var Group = function() {
   _.r = function() {
     $.cam.r(_.e);
   };
+
+  // Clear group
+  _.clr = function() {
+    _.e = [];
+  };
 };

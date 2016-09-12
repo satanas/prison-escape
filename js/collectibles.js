@@ -62,3 +62,39 @@ var Heart = function(x, y) {
     $.x.r();
   };
 };
+
+var PowerUp = function(x, y) {
+  var _ = this;
+  // Possible heights
+  _.hs = [124, 261, 401];
+  _.inherits(Sprite);
+  _.n = rnde(['a', 'l', 'l']);
+  Sprite.call(_, x, _.hs[y], 32, 32);
+  _.an = new Animator([
+    $.svg.n(data.pwi),
+    $.svg.n(data.pwi.replace('f00', 'ff0')),
+    $.svg.n(data.pwi.replace('f00', '00f')),
+    $.svg.n(data.pwi.replace('f00', 'f0f')),
+    $.svg.n(data.pwi.replace('f00', '0f0')),
+    $.svg.n(data.pwi.replace('f00', 'fff'))
+  ], 150);
+
+  _.u = function() {
+    _.x -= $.e / 1000 * $.sp;
+    _.ur();
+    _.an.u();
+    if (_.b.r < 0) _.a = 0;
+  };
+
+  // Get power up type
+  _.g = function() {
+    _.n = rnde(['a', 'l', 'l']);
+    return _.n;
+  };
+
+  _.r = function() {
+    $.x.s();
+    $.x.di(_.an.g(), _.x, _.y);
+    $.x.r();
+  };
+};

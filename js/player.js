@@ -11,7 +11,8 @@ var Player = function() {
   _.iv = 0; // Invincible
   _.id = 1000; // Invincibility delay
   _.ic = 0; // Invincibility counter
-  _.pw = new PowerUp(_);
+  _.pw = new Powering(_);
+
   _.inherits(Sprite);
   Sprite.call(_, 120, _.hs[_.hi], 40, 64);
 
@@ -60,10 +61,14 @@ var Player = function() {
       _.y = _.hs[_.hi];
       $.s.p('j');
     } else if ($.i.d(32)) {
-      if (_.sc <= 0) {
-        _.sc = _.sd;
-        $.s.p('sh');
-        $.g.pb.a(new Bullet(_.x + _.w, _.y + (_.h/ 2)));
+      if (_.pw.v === 2 && _.ls) {
+        _.ls.s = 1;
+      } else {
+        if (_.sc <= 0 && _.pw.v <= 0) {
+          _.sc = _.sd;
+          $.s.p('sh');
+          $.g.pb.a(new Bullet(_.x + _.w, _.y + (_.h / 2)));
+        }
       }
     }
     _.ur();
@@ -75,14 +80,21 @@ var Player = function() {
         // Coins
         $.cc += 1;
         $.s.p('c');
-      } else if (c.n = 'h') {
+      } else if (c.n === 'h') {
         // Hearts
         _.hp += 1;
         _.hp = (_.hp > _.mhp) ? _.mhp : _.hp;
         $.s.p('hp');
-        _.pw.s(1);
-      } else if (c.n = 'p') {
+      } else if (c.n === 'a' || c.n === 'l') {
         if (_.pw.v === 1) return;
+
+        $.s.p('pw');
+        if (c.n === 'a') {
+          _.pw.s(1);
+        } else if (c.n === 'l') {
+          _.pw.s(2);
+          $.g.pb.a(new Laser(_));
+        }
       }
     });
 
@@ -109,7 +121,7 @@ var Player = function() {
   _.r = function() {
     if (_.pw.v > 0 && !_.pw.ip()) {
       $.x.s();
-      $.x.fs('white');
+      $.x.fs(data.pw[_.pw.v].c);
       $.x.bp();
       if (_.pw.ie()) {
         if (_.ia.g()) $.x.arc(_.x + (_.w / 2), _.y + (_.h / 2), 40, 0, PI * 2);
@@ -210,32 +222,31 @@ var IntroPlayer = function() {
   };
 };
 
-var PowerUp = function(pi) {
+var Powering = function(pi) {
   var _ = this;
   _.pi = pi; // Player instance
-  _.pwt = 3000; // Power up time
+  _.pwt = 0; // Power up time
   _.pt = 1000; // Presentation time
-  _.wt = 1200; // Warning time
+  _.wt = 1500; // Warning time
   _.c = 0; // Counter
   _.v = 0; // Power up value (1: adrenaline, 2: s-weapon)
   _.ps = 0; // Previous speed;
   _.p = 0; // Presented?
-  _.n = [
-    0,
-    'ADRENALINE',
-  ];
 
   _.u = function() {
     if (_.v > 0) {
       _.c -= $.e;
       if (_.c <= 0 && !_.p) {
         _.p = 1;
-        _.c = _.pwt;
+        _.c = data.pw[_.v].t;
       }
+      if (_.v === 1 && _.p) $.s.p('ad');
+      if (_.v === 2 && _.p) $.s.p('la');
     }
     if (_.c <= 0 && _.p) {
       // Give player invincibility after
       if (_.v === 1) _.pi.si();
+      if (_.v === 2) $.g.pb.clr();
       _.v = 0;
     }
   };
@@ -255,21 +266,21 @@ var PowerUp = function(pi) {
 
   // Is the power ending?
   _.ie = function() {
-    return (_.v > 0 && _.p && _.c <= _.pwt / 2);
+    return (_.v > 0 && _.p && _.c <= _.wt);
   };
 
   // Render power up presentation
   _.r = function(y) {
     $.x.s();
     var y = y - 46;
-    $.x.fs('blue');
+    $.x.fs(data.pw[_.v].b);
     $.x.fr(0, y, $.vw, 110);
-    $.x.fs('#00ff7f');
+    $.x.fs(data.pw[_.v].c);
     $.x.fr(0, y + 30, $.vw, 5);
     $.x.fr(0, y + 85, $.vw, 5);
-    $.x.fs('aqua');
+    $.x.fs(data.pw[_.v].c);
     $.x.fr(0, y + 40, $.vw, 40);
-    $.x.ct(_.n[_.v], 37, y + 69, '#ff1493', 'courier');
+    $.x.ct(data.pw[_.v].n, 37, y + 69, '#ff1493', 'courier');
     $.x.r();
   };
 };

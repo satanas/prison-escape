@@ -8,6 +8,7 @@ var Level = function(de, md) {
   _.xr = 50; // Max running cops per game
   _.xw = 40; // Max laser walls per game
   _.xh = 30; // Max hearts per game
+  _.xp = 12; // Max powerups per game
   // Element positions (as arrays)
   _.pos = {
     c: [
@@ -29,6 +30,7 @@ var Level = function(de, md) {
     _.spawn(_.xr, 500, 50, 'e', RunningCop);
     _.spawn(_.xw, 1000, 10, 'e', LaserWall);
     _.spawn(_.xh, 8000, 25, 'c', Heart);
+    _.spawn(_.xp, 4000, 32, 'c', PowerUp);
   };
 
   // Last enemy
@@ -103,5 +105,5 @@ var Level = function(de, md) {
     }
   };
 
-  $.g.c.a(new Heart(350, 1));
+  //$.g.c.a(new PowerUp(850, 1));
 };

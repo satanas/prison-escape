@@ -19,7 +19,6 @@ var GameScene = function() {
 
   $.scn.gover = new GameOverScene();
 
-  _.p = new Player();
   // Groups
   $.g.p = new Group(); // Platforms
   $.g.pb = new Group(); // Player bullets
@@ -27,6 +26,8 @@ var GameScene = function() {
   $.g.e = new Group(); // Enemies
   $.g.w = new Group(); // Warnings
   $.g.x = new Group(); // Explosions
+
+  _.p = new Player();
 
   _.px1 = new Parallax1($.sp);
   _.px2 = new Parallax2($.sp);

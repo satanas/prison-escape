@@ -15,7 +15,7 @@ var Cop = function(x, y) {
 
     $.g.pb.c(_, function(c, b) {
       $.s.p('eh');
-      b.a = 0;
+      if (b.n !== 'l') b.a = 0;
       _.hp -= 1;
       if (_.hp <= 0) _.a = 0;
     });
@@ -62,7 +62,7 @@ var RunningCop = function(x, y) {
 
     $.g.pb.c(_, function(c, b) {
       $.s.p('eh');
-      b.a = 0;
+      if (b.n !== 'l') b.a = 0;
       _.hp -= 1;
       if (_.hp <= 0) _.a = 0;
     });
@@ -89,6 +89,13 @@ var Explosive = function(x, y) {
     _.ur();
     _.an.u();
     if (_.b.r < 0) _.a = 0;
+
+    $.g.pb.c(_, function(c, b) {
+      if (b.n !== 'l') return;
+      _.a = 0;
+      $.g.x.a(new Explosion(_.x + (_.w / 2), _.y + (_.h / 2)));
+      $.s.p('xp');
+    });
   };
 
   _.r = function() {
