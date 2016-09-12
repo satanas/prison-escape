@@ -171,10 +171,6 @@ var IntroPlayer = function() {
   _.ra = function() {
     _.an.u();
     _.x += _.rsp * ($.e / 1000);
-    //if (_.an.g() !== _.cf) {
-    //  $.s.p('st');
-    //  _.cf = _.an.g();
-    //}
   };
 
   _.r = function() {
