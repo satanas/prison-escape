@@ -3,7 +3,8 @@ var Player = function() {
   // Possible heights
   _.hs = [106, 246, 386];
   _.hi = 1; // Height index
-  _.hp = 3;
+  _.mhp = 3; // Max hp
+  _.hp = _.mhp;
   _.sd = 150; // Shooting Delay
   _.sc = 0; // Shooting Counter
   _.rs = 180; // Running speed
@@ -62,11 +63,19 @@ var Player = function() {
     }
     _.ur();
 
-    // Collisions with coins
+    // Collisions with collectibles
     $.g.c.c(_, function(p, c) {
       c.a = 0;
-      $.cc += 1;
-      $.s.p('c');
+      if (c.n === 'c') {
+        // Coins
+        $.cc += 1;
+        $.s.p('c');
+      } else if (c.n = 'h') {
+        // Hearts
+        _.hp += 1;
+        _.hp = (_.hp > _.mhp) ? _.mhp : _.hp;
+        $.s.p('hp');
+      }
     });
 
     // Collisions with enemies
