@@ -11,6 +11,7 @@ var Player = function() {
   _.iv = 0; // Invincible
   _.id = 1000; // Invincibility delay
   _.ic = 0; // Invincibility counter
+  _.pw = new PowerUp(_);
   _.inherits(Sprite);
   Sprite.call(_, 120, _.hs[_.hi], 40, 64);
 
@@ -25,19 +26,26 @@ var Player = function() {
     return (_.x > $.vw);
   };
 
+  _.si = function() {
+    _.iv = 1;
+    _.ic = _.id;
+  };
+
   _.u = function() {
     if (_.hp <= 0) return;
     if (_.sc > 0) _.sc -= $.e;
 
-    _.an.u();
+    _.pw.u();
+    if (!_.pw.ip()) _.an.u();
+    if (_.pw.ip()) return;
 
     if ($.dt > $.de) {
       if (_.x < $.vw) _.x += ($.e / 1000) * _.rs
       return;
     }
 
+    _.ia.u();
     if (_.iv) {
-      _.ia.u();
       _.ic -= $.e;
       if (_.ic <= 0 || _.hp <= 0) _.iv = 0;
     }
@@ -72,15 +80,18 @@ var Player = function() {
         _.hp += 1;
         _.hp = (_.hp > _.mhp) ? _.mhp : _.hp;
         $.s.p('hp');
+        _.pw.s(1);
+      } else if (c.n = 'p') {
+        if (_.pw.v === 1) return;
       }
     });
 
     // Collisions with enemies
     if (!_.iv) {
       $.g.e.c(_, function(p, e) {
+        if (_.pw.v === 1) return;
         _.hp -= 1;
-        _.iv = 1;
-        _.ic = _.id;
+        _.si();
         if (e.n === 'cop') {
           $.s.p('hu');
           e.sp = 0;
@@ -96,6 +107,19 @@ var Player = function() {
   };
 
   _.r = function() {
+    if (_.pw.v > 0 && !_.pw.ip()) {
+      $.x.s();
+      $.x.fs('white');
+      $.x.bp();
+      if (_.pw.ie()) {
+        if (_.ia.g()) $.x.arc(_.x + (_.w / 2), _.y + (_.h / 2), 40, 0, PI * 2);
+      } else {
+        $.x.arc(_.x + (_.w / 2), _.y + (_.h / 2), 40, 0, PI * 2);
+      }
+      $.x.f();
+      $.x.r();
+    }
+    if (_.pw.ip()) _.pw.r(_.y);
     $.x.s();
     if (_.iv && _.hp > 0) {
       if (_.ia.g()) $.x.di(_.an.g(), _.x, _.y);
@@ -186,19 +210,66 @@ var IntroPlayer = function() {
   };
 };
 
-var Powering = function() {
-  _.t = 3000; // Power up time
+var PowerUp = function(pi) {
+  var _ = this;
+  _.pi = pi; // Player instance
+  _.pwt = 3000; // Power up time
+  _.pt = 1000; // Presentation time
+  _.wt = 1200; // Warning time
   _.c = 0; // Counter
-  _.p = 0; // Power up (1: adrenaline, 2: s-weapon)
-  //_.an = new Animator([0, 1], )
+  _.v = 0; // Power up value (1: adrenaline, 2: s-weapon)
+  _.ps = 0; // Previous speed;
+  _.p = 0; // Presented?
+  _.n = [
+    0,
+    'ADRENALINE',
+  ];
 
   _.u = function() {
-    if (_.p > 0) _.c -= $.e;
+    if (_.v > 0) {
+      _.c -= $.e;
+      if (_.c <= 0 && !_.p) {
+        _.p = 1;
+        _.c = _.pwt;
+      }
+    }
+    if (_.c <= 0 && _.p) {
+      // Give player invincibility after
+      if (_.v === 1) _.pi.si();
+      _.v = 0;
+    }
   };
 
   // Set power up
-  _.s = function(p) {
-    _.p = p;
-    _.c = _.t;
+  _.s = function(v) {
+    _.ps = $.sp;
+    _.p = 0;
+    _.v = v;
+    _.c = _.pt;
+  };
+
+  // Is presenting the power?
+  _.ip = function() {
+    return (_.v > 0 && !_.p);
+  };
+
+  // Is the power ending?
+  _.ie = function() {
+    return (_.v > 0 && _.p && _.c <= _.pwt / 2);
+  };
+
+  // Render power up presentation
+  _.r = function(y) {
+    $.x.s();
+    var y = y - 46;
+    $.x.fs('blue');
+    $.x.fr(0, y, $.vw, 110);
+    $.x.fs('#00ff7f');
+    $.x.fr(0, y + 30, $.vw, 5);
+    $.x.fr(0, y + 85, $.vw, 5);
+    $.x.fs('aqua');
+    $.x.fr(0, y + 40, $.vw, 40);
+    $.x.ct(_.n[_.v], 37, y + 69, '#ff1493', 'courier');
+    $.x.r();
   };
 };

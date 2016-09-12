@@ -52,7 +52,7 @@ var GameScene = function() {
     _.px2.u();
     _.px1.u();
     if ($.dt < $.de) {
-      $.g.e.u();
+      if (!_.p.pw.ip()) $.g.e.u();
       $.g.c.u();
       $.g.pb.u();
       $.g.w.u();
@@ -83,8 +83,13 @@ var GameScene = function() {
         $.s.p('go');
         _.gos = 1;
       }
+    } else if (_.p.pw.ip()) {
+      $.sp = 0;
     } else if ($.dt < $.de) {
       $.sp = _.mis + ($.dt * _.mxs) / _.de;
+      if (_.p.pw.v === 1) {
+        $.sp = 1500;
+      }
     }
 
     // Player escaped
