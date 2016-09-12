@@ -75,7 +75,10 @@ var Player = function() {
         _.hp -= 1;
         _.iv = 1;
         _.ic = _.id;
-        if (e.n === 'cop') $.s.p('hu');
+        if (e.n === 'cop') {
+          $.s.p('hu');
+          e.sp = 0;
+        }
         if (e.n === 'exp') {
           e.a = 0;
           $.g.x.a(new Explosion(_.x + (_.w / 2), _.y + (_.h / 2)));
