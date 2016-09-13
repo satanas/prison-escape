@@ -23,8 +23,10 @@ var Level = function(de, md) {
     ]
   };
 
-  _.gen = function() {
-    spwCoins();
+  // Generate Level
+  // p: player instance
+  _.gen = function(p) {
+    spwCoins(p);
     _.spawn(_.xe, 0, 50, 'e', Cop);
     _.spawn(_.xx, 200, 50, 'e', Explosive);
     _.spawn(_.xr, 500, 50, 'e', RunningCop);
@@ -54,14 +56,14 @@ var Level = function(de, md) {
     return 1
   };
 
-  var _spwCoinsSeg = function(x, y, n) {
+  var _spwCoinsSeg = function(x, y, n, p) {
     for (var i=0; i<n; i++) {
-      $.g.c.a(new Coin(x + (50 * i), y));
+      $.g.c.a(new Coin(x + (50 * i), y, p));
     }
     return n * 74;
   };
 
-  var spwCoins = function() {
+  var spwCoins = function(p) {
     var b, s, y, n, bb;
     b = rndr(700, 1000);
 
@@ -71,7 +73,7 @@ var Level = function(de, md) {
       n = (_.xc >= n) ? n : _.xc;
 
       bb = b - 50;
-      b += _spwCoinsSeg(b, y, n);
+      b += _spwCoinsSeg(b, y, n, p);
       _.xc -= n;
       _.pos.c[y].push([bb, b]);
       b += rndr(200, 700)

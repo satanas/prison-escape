@@ -16,13 +16,19 @@ var data = {
       b: 'blue',
       c: 'aqua',
       f: 'red',
-      n: 'ADRENALINE'
+      n: 'ADRENALINE BOOST'
     }, {
       t: 6000,
       b: '#bf00bf',
       c: '#7cfc00',
       f: 'red',
-      n: 'LASER'
+      n: 'SUPER DUPER LASER'
+    }, {
+      t: 6000,
+      b: '#f00',
+      c: '#ff0',
+      f: 'red',
+      n: 'HIPER MAGNETISM'
     }
   ]
 };

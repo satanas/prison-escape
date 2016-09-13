@@ -38,7 +38,7 @@ var GameScene = function() {
   $.g.p.a(new Platform(450));
 
   _.lvl = new Level(_.de, 1000);
-  _.lvl.gen();
+  _.lvl.gen(_.p);
   $.de = _.lvl.lep();
   //$.de = 6000;
 
