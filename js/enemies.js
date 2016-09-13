@@ -6,7 +6,7 @@ var Cop = function(x, y) {
   _.n = 'cop';
   _.inherits(Sprite);
   _.im = $.svg.n('<g><rect fill="#007fff" height="20" id="1" stroke="#000" stroke-opacity="null" stroke-width="0" width="40" x="0" y="24"/><rect fill="#ffd4aa" height="24" id="2" stroke="#000" stroke-opacity="null" stroke-width="0" width="40" x="0" y="0"/><rect fill="#000000" height="3" id="3" stroke="#000" stroke-opacity="null" stroke-width="0" width="4" x="14" y="12"/><rect fill="#000000" height="3" id="4" stroke="#000" stroke-opacity="null" stroke-width="0" width="4" x="2" y="12"/><rect fill="#0000bf" height="8" id="5" stroke="#000" stroke-opacity="null" stroke-width="0" width="8" x="5" y="56"/><rect fill="#0000bf" height="8" id="6" stroke="#000" stroke-opacity="null" stroke-width="0" width="8" x="25" y="56"/><rect fill="#0000bf" height="20" id="7" stroke="#000" stroke-opacity="null" stroke-width="0" width="18" x="23" y="0"/><rect fill="#0000bf" height="8" id="8" stroke="#000" stroke-opacity="null" stroke-width="0" width="25" x="0" y="0"/><rect fill="#0000bf" height="13" id="9" stroke="#000" stroke-opacity="null" stroke-width="0" width="40" x="0" y="43"/><path d="m14,33l3,-3l3,3l-3,3l-3,-3z" fill="#ffff00" id="A" stroke="#000" stroke-opacity="null" stroke-width="0"/></g>', 40, 64);
-  Sprite.call(_, x, _.hs[y], 56, 64);
+  Sprite.call(_, x, _.hs[y], 30, 64);
 
   _.u = function() {
     _.x -= $.e / 1000 * $.sp;
@@ -24,6 +24,8 @@ var Cop = function(x, y) {
   _.r = function() {
     $.x.s();
     $.x.di(_.im, _.x, _.y);
+    $.x.ss('red');
+    $.x.sr(_.x, _.y, _.w, _.h);
     $.x.r();
   };
 };
@@ -38,7 +40,7 @@ var RunningCop = function(x, y) {
   _.ws = 0; // Warning sent
   _.n = 'cop';
   _.inherits(Sprite);
-  Sprite.call(_, x, _.hs[y], 48, 64);
+  Sprite.call(_, x, _.hs[y], 43, 64);
   _.an = new Animator([0, 1], 100);
   _.an.cb = function(i) {
     $.s.p('cs');
@@ -71,6 +73,8 @@ var RunningCop = function(x, y) {
   _.r = function() {
     $.x.s();
     $.x.di(_.im, _.x, _.y);
+    $.x.ss('red');
+    $.x.sr(_.x, _.y, _.w, _.h);
     $.x.r();
   };
 };
