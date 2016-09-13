@@ -88,7 +88,7 @@ var Instructions = function() {
   var _ = this;
   _.inherits(Sprite);
   Sprite.call(_, 0, 200, $.vw, 200);
-  _.it = 2500; // Instructions time
+  _.it = 2700; // Instructions time
 
   _.u = function() {
     _.it -= $.e;

@@ -24,8 +24,6 @@ var Cop = function(x, y) {
   _.r = function() {
     $.x.s();
     $.x.di(_.im, _.x, _.y);
-    $.x.ss('red');
-    $.x.sr(_.x, _.y, _.w, _.h);
     $.x.r();
   };
 };
@@ -73,8 +71,6 @@ var RunningCop = function(x, y) {
   _.r = function() {
     $.x.s();
     $.x.di(_.im, _.x, _.y);
-    $.x.ss('red');
-    $.x.sr(_.x, _.y, _.w, _.h);
     $.x.r();
   };
 };
