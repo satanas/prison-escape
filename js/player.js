@@ -61,7 +61,7 @@ var Player = function() {
       _.y = _.hs[_.hi];
       $.s.p('j');
     } else if ($.i.d(32)) {
-      if (_.sc <= 0 && _.pw.v <= 0) {
+      if (_.sc <= 0 && (_.pw.v <= 0 || _.pw.v === 3)) {
         _.sc = _.sd;
         $.s.p('sh');
         $.g.pb.a(new Bullet(_.x + _.w, _.y + (_.h / 2)));
@@ -257,7 +257,7 @@ var Powering = function(pi) {
     if (_.c <= 0 && _.p) {
       if (_.v === 1) _.pi.si(); // Give player invincibility after adrenaline
       if (_.v === 2) $.g.pb.clr();
-      if (_.v === 2) $.mg = 0;
+      if (_.v === 3) $.mg = 0;
       _.v = 0;
     }
   };
