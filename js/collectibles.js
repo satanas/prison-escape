@@ -103,7 +103,7 @@ var PowerUp = function(x, y) {
 
   // Get power up type
   _.g = function() {
-    _.n = rnde(['a', 'l', 'l', 'm', 'm']);
+    _.n = rnde(['a', 'l', 'm', 'm', 'a', 'l']);
     return _.n;
   };
 
