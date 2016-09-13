@@ -107,5 +107,5 @@ var Level = function(de, md) {
     }
   };
 
-  $.g.c.a(new PowerUp(850, 1));
+  //$.g.c.a(new PowerUp(850, 1));
 };

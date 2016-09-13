@@ -2,7 +2,6 @@ var Coin = function(x, y, p) {
   var _ = this;
   // Possible heights
   _.hs = [125, 265, 405];
-  $.mg = 1;
   _.ms = 1500; // Magnetism speed
   _.md = pow(300, 2); // Min distance for magnetism
   _.p = p; // Player instance
@@ -84,7 +83,7 @@ var PowerUp = function(x, y) {
   // Possible heights
   _.hs = [124, 261, 401];
   _.inherits(Sprite);
-  _.n = rnde(['a', 'l', 'l']);
+  _.n = 'p';
   Sprite.call(_, x, _.hs[y], 32, 32);
   _.an = new Animator([
     $.svg.n(data.pwi),
@@ -104,7 +103,7 @@ var PowerUp = function(x, y) {
 
   // Get power up type
   _.g = function() {
-    _.n = rnde(['a', 'l', 'l']);
+    _.n = rnde(['a', 'l', 'l', 'm', 'm']);
     return _.n;
   };
 

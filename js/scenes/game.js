@@ -4,6 +4,7 @@ var GameScene = function() {
   Scene.call(_);
 
   // Global variables
+  $.mg = 0; // Magnetism
   $.dt = 0; // Distance traveled
   $.cc = 0; // Collected coins
   _.de = 100000; // Min distance to escape

@@ -81,15 +81,19 @@ var Player = function() {
         _.hp += 1;
         _.hp = (_.hp > _.mhp) ? _.mhp : _.hp;
         $.s.p('hp');
-      } else if (c.n === 'a' || c.n === 'l') {
+      } else if (c.n === 'p') {
         if (_.pw.v === 1) return;
 
         $.s.p('pw');
+        var pw = c.g();
         if (c.n === 'a') {
           _.pw.s(1);
         } else if (c.n === 'l') {
           _.pw.s(2);
           $.g.pb.a(new Laser(_));
+        } else if (c.n === 'm') {
+          _.pw.s(3);
+          $.mg = 1;
         }
       }
     });
@@ -125,6 +129,17 @@ var Player = function() {
         $.x.arc(_.x + (_.w / 2), _.y + (_.h / 2), 40, 0, PI * 2);
       }
       $.x.f();
+      $.x.r();
+    } else if (_.pw.v === 3 && !_.pw.ip()) {
+      $.x.s();
+      $.x.ss(data.pw[_.pw.v].c);
+      $.x.bp();
+      if (_.pw.ie()) {
+        if (_.ia.g()) $.x.arc(_.x + (_.w / 2), _.y + (_.h / 2), 40, 0, PI * 2);
+      } else {
+        $.x.arc(_.x + (_.w / 2), _.y + (_.h / 2), 40, 0, PI * 2);
+      }
+      $.x.k();
       $.x.r();
     }
     if (_.pw.ip()) _.pw.r(_.y);
@@ -242,6 +257,7 @@ var Powering = function(pi) {
     if (_.c <= 0 && _.p) {
       if (_.v === 1) _.pi.si(); // Give player invincibility after adrenaline
       if (_.v === 2) $.g.pb.clr();
+      if (_.v === 2) $.mg = 0;
       _.v = 0;
     }
   };
