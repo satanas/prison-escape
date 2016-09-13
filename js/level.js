@@ -2,13 +2,13 @@ var Level = function(de, md) {
   var _ = this;
   _.md = md; // Min distance to start showing elements
   _.de = de; // Distance to escape
-  _.xc = 300; // Max coins per game
+  _.xc = 400; // Max coins per game
   _.xe = 120; // Max enemies per game
   _.xx = 60; // Max explosives per game
   _.xr = 50; // Max running cops per game
   _.xw = 40; // Max laser walls per game
   _.xh = 30; // Max hearts per game
-  _.xp = 15; // Max powerups per game
+  _.xp = 20; // Max powerups per game
   // Element positions (as arrays)
   _.pos = {
     c: [
