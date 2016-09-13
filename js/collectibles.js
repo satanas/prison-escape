@@ -1,7 +1,11 @@
-var Coin = function(x, y) {
+var Coin = function(x, y, p) {
   var _ = this;
   // Possible heights
   _.hs = [125, 265, 405];
+  $.mg = 1;
+  _.ms = 1500; // Magnetism speed
+  _.md = pow(300, 2); // Min distance for magnetism
+  _.p = p; // Player instance
   _.inherits(Sprite);
   Sprite.call(_, x, _.hs[y], 24, 24);
   _.n = 'c';
@@ -9,6 +13,18 @@ var Coin = function(x, y) {
 
   _.u = function() {
     _.x -= $.e / 1000 * $.sp;
+    if ($.mg && $.cam.inView(_)) {
+      var px = p.x + (p.w / 2),
+          py = p.y + (p.h / 2),
+          dt2 = pow(px - _.x, 2) + pow(py - _.y, 2);
+
+      if (dt2 <= _.md) {
+        var ang = atan((p.y - _.y) / (p.x - _.x)); // * 180 / PI;
+        if (p.x > _.x) ang += PI;
+        _.x -=  cos(ang) * ($.e / 1000) * _.ms;
+        _.y -=  sin(ang) * ($.e / 1000) * _.ms;
+      }
+    }
     _.ur();
     _.an.u();
     if (_.b.r < 0) _.a = 0;
