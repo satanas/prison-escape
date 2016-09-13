@@ -22,6 +22,7 @@ module.exports = {
     "js/parallax.js",
     "js/player.js",
     "js/bullets.js",
+    "js/explosion.js",
     "js/level.js",
     "js/enemies.js",
     "js/bsod.js",
