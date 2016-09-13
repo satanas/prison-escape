@@ -5,6 +5,7 @@ var Coin = function(x, y, p) {
   _.ms = 1500; // Magnetism speed
   _.md = pow(300, 2); // Min distance for magnetism
   _.p = p; // Player instance
+  _.mg = 0; // Magnetized
   _.inherits(Sprite);
   Sprite.call(_, x, _.hs[y], 24, 24);
   _.n = 'c';
@@ -12,7 +13,9 @@ var Coin = function(x, y, p) {
 
   _.u = function() {
     _.x -= $.e / 1000 * $.sp;
-    if ($.mg && $.cam.inView(_)) {
+    if ($.mg && $.cam.inView(_) && !_.mg) _.mg = 1;
+
+    if (_.mg) {
       var px = p.x + (p.w / 2),
           py = p.y + (p.h / 2),
           dt2 = pow(px - _.x, 2) + pow(py - _.y, 2);
