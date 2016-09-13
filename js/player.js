@@ -135,9 +135,9 @@ var Player = function() {
       $.x.ss(data.pw[_.pw.v].c);
       $.x.bp();
       if (_.pw.ie()) {
-        if (_.ia.g()) $.x.arc(_.x + (_.w / 2), _.y + (_.h / 2), 40, 0, PI * 2);
+        if (_.ia.g()) $.x.arc(_.x + (_.w / 2), _.y + (_.h / 2), 100, 0, PI * 2);
       } else {
-        $.x.arc(_.x + (_.w / 2), _.y + (_.h / 2), 40, 0, PI * 2);
+        $.x.arc(_.x + (_.w / 2), _.y + (_.h / 2), 100, 0, PI * 2);
       }
       $.x.k();
       $.x.r();
@@ -223,8 +223,6 @@ var IntroPlayer = function() {
   _.r = function() {
     $.x.s();
     if (!_.d) {
-      //$.x.tn(_.w, 0)
-      //$.x.sc(-1, 1);
       $.x.di(_.an.g(), _.x, _.y);
     } else {
       $.x.di(_.an.g(), _.x, _.y);

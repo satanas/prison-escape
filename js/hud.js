@@ -2,8 +2,8 @@ var HUD = function(p) {
   var _ = this;
   _.p = p; // Player instance
   _.h = 60;
-  _.h1 = $.svg.n(data.h);
-  _.h2 = $.svg.n(data.h.replace('e22222', 'ccc'));
+  _.h1 = $.svg.n(data.h, 24, 24);
+  _.h2 = $.svg.n(data.h.replace('e22222', 'ccc'), 24, 24);
   _.co = new Coin(168, 0);
   _.co.y = 18;
 

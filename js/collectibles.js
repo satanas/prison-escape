@@ -41,10 +41,12 @@ var Coin = function(x, y, p) {
       $.x.f();
       $.x.fs("black");
     } else if (_.an.g() === 1 || _.an.g() === 3) {
-      $.x.bp();
-      $.x.e(_.x + 12, _.y + (_.h / 2), 7, 12, 0, 0, PI * 2);
-      $.x.f();
-      $.x.fs("black");
+      if ($.x.e) {
+        $.x.bp();
+        $.x.e(_.x + 12, _.y + (_.h / 2), 7, 12, 0, 0, PI * 2);
+        $.x.f();
+        $.x.fs("black");
+      }
     } else if (_.an.g() === 2) {
       $.x.fr(_.x + 9, _.y, 6, _.h);
     }
@@ -60,8 +62,8 @@ var Heart = function(x, y) {
   Sprite.call(_, x, _.hs[y], 24, 24);
   _.n = 'h';
   _.an = new Animator([0, 1], 250);
-  _.h1 = $.svg.n(data.h);
-  _.h2 = $.svg.n(data.h.replace('e22222', 'f00'));
+  _.h1 = $.svg.n(data.h, 24, 24);
+  _.h2 = $.svg.n(data.h.replace('e22222', 'f00'), 24, 24);
 
   _.u = function() {
     _.x -= $.e / 1000 * $.sp;
@@ -89,12 +91,12 @@ var PowerUp = function(x, y) {
   _.n = 'p';
   Sprite.call(_, x, _.hs[y], 32, 32);
   _.an = new Animator([
-    $.svg.n(data.pwi),
-    $.svg.n(data.pwi.replace('f00', 'ff0')),
-    $.svg.n(data.pwi.replace('f00', '00f')),
-    $.svg.n(data.pwi.replace('f00', 'f0f')),
-    $.svg.n(data.pwi.replace('f00', '0f0')),
-    $.svg.n(data.pwi.replace('f00', 'fff'))
+    $.svg.n(data.pwi, 32, 32),
+    $.svg.n(data.pwi.replace('f00', 'ff0'), 32, 32),
+    $.svg.n(data.pwi.replace('f00', '00f'), 32, 32),
+    $.svg.n(data.pwi.replace('f00', 'f0f'), 32, 32),
+    $.svg.n(data.pwi.replace('f00', '0f0'), 32, 32),
+    $.svg.n(data.pwi.replace('f00', 'fff'), 32, 32)
   ], 150);
 
   _.u = function() {
